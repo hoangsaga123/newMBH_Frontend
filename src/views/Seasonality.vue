@@ -238,7 +238,7 @@ export default {
 
         async getData(){
             try {
-                await axios.post('http://52.62.124.126:8080/api/seasonality', {
+                await axios.post('https://3.25.51.142.nip.io/api/seasonality', {
                     "industry": this.searchIndustries.join(),
                     "state": this.searchState,
                     "city": this.searchCity,

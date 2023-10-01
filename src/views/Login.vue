@@ -101,7 +101,7 @@ export default {
             this.clearError()
             if (this.validLoginEmail && this.validPassword) {
                 try {
-                    const response = await axios.post('http://52.62.124.126:8080/api/v1/auth/authenticate', {
+                    const response = await axios.post('https://3.25.51.142.nip.io/api/v1/auth/authenticate', {
                         "email": this.loginEmail,
                         "password": this.loginPassword
                     });
