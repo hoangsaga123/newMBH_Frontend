@@ -8,7 +8,7 @@
                     <b-row>
                         <!-- COMPANY NAME -->
                         <b-col md="9">
-                            <h1 class="text-left mt-3">{{business.firm}}</h1>
+                            <h1 class="text-left mt-3">{{business.name}}</h1>
                         </b-col>
                         <!-- UPDATE LATER
                         <b-col>
@@ -38,14 +38,14 @@
                             <br>
                             <b-badge variant="success" class="p-3 w-100"><h3>Contact Details</h3></b-badge>
                             <b-list-group class="mt-1">
-                                <b-list-group-item><b>Business Address: </b> {{business.addr}}, {{business.districtsDetails.name}}, {{business.districtsDetails.postcode}}, {{business.districtsDetails.state}}, Australia</b-list-group-item>
+                                <b-list-group-item><b>Accomodation Address: </b> {{business.address}}, {{business.districtsDetails.name}}, {{business.districtsDetails.postcode}}, {{business.districtsDetails.state}}, Australia</b-list-group-item>
                                 <b-list-group-item><b>Company Contact's Name: </b> {{business.contact}}</b-list-group-item>
-                                <b-list-group-item><b>Company Contact's Role: </b> {{business.role}}</b-list-group-item>
-                                <b-list-group-item v-show="business.tel != ''"><b>LANDLINE #: </b> {{business.tel}}</b-list-group-item>
+                                <!--<b-list-group-item><b>Company Contact's Role: </b> {{business.role}}</b-list-group-item>-->
+                                <b-list-group-item v-show="business.telephone != ''"><b>LANDLINE #: </b> {{business.telephone}}</b-list-group-item>
                                 <b-list-group-item v-show="business.fax != ''"><b>FAX #: </b> {{business.fax}}</b-list-group-item>
-                                <b-list-group-item v-show="business.mob != ''"><b>MOBILE #: </b> {{business.mob}}</b-list-group-item>
+                                <b-list-group-item v-show="business.mobile != ''"><b>MOBILE #: </b> {{business.mobile}}</b-list-group-item>
                                 <b-list-group-item><b>Contact Email: </b> {{business.email}}</b-list-group-item>
-                                <b-list-group-item v-if="business.web != ''"><b>Website: </b><a :href="business.web">{{business.web}}</a></b-list-group-item>
+                                <b-list-group-item v-if="business.website != ''"><b>Website: </b><a :href="business.website">{{business.website}}</a></b-list-group-item>
                             </b-list-group>
                             <br>
                             <br>
@@ -88,7 +88,7 @@
                             <!-- GENERAL DETAILS -->
                             <h1 class="text-center"><b-badge variant="warning" class="mb-4 p-3 w-100" size="lg">General Details</b-badge></h1>
                             <b-form-group label="Company Name: " class=" text-right" label-cols="3" content-cols="5" label-for="companyName" :state="validCompanyName" invalid-feedback="Name must be within 8 to 80 characters">
-                                <b-form-input type="text" id="companyName" v-model="business.firm" trim :state="validCompanyName"/>
+                                <b-form-input type="text" id="companyName" v-model="business.name" trim :state="validCompanyName"/>
                             </b-form-group>
                             <b-alert variant="warning" v-show="abnValidationError" show><p>An error occured validating your ABN online, please try again.</p></b-alert>
                             <b-form-group label="ABN: " class="text-right" label-cols="3" content-cols="7" label-for="companyABN" :state="validABN" invalid-feedback="Please enter your unique 11 digit ABN">
@@ -110,7 +110,7 @@
                             <!-- ADDRESS DETAILS -->
                             <h1 class="text-center"><b-badge variant="success" class="mb-4 p-3 w-100" size="lg">Address</b-badge></h1>
                             <b-form-group label="Street/Road Address: " class="text-right" label-cols="3" content-cols="8" label-for="companyAddress" :state="validAddress" invalid-feedback="Please enter a valid street address">
-                                <b-form-input id="companyAddress" v-model="business.addr" trim :state="validAddress" />
+                                <b-form-input id="companyAddress" v-model="business.address" trim :state="validAddress" />
                             </b-form-group>
                             <b-form-group label-for="companyLocality" label="Town/City: " class="text-right" label-cols="3" content-cols="5" :state="validLocality" invalid-feedback="Only valid characters, alphabetic or in [-, ', -, /, \, .]">
                                 <b-form-input  id="companyLocality" v-model="business.districtsDetails.name" trim :state="validLocality"/>
@@ -135,19 +135,19 @@
                                 <b-form-input type="text" id="contactPosition" v-model="business.role" required trim :state="validContactPosition" placeholder="HR Manager, etc." />
                             </b-form-group>
                             <b-form-group label="Landline: " class=" text-right" label-cols="3" content-cols="8" label-for="landlinePhone">
-                                <VuePhoneNumberInput id="landlinePhone" v-model="business.tel" no-example default-country-code="AU"/>
+                                <VuePhoneNumberInput id="landlinePhone" v-model="business.telephone" no-example default-country-code="AU"/>
                             </b-form-group>
                             <b-form-group label="Fax: " class=" text-right" label-cols="3" content-cols="8" label-for="faxPhone">
                                 <VuePhoneNumberInput id="faxPhone" v-model="business.fax" no-example default-country-code="AU"/>
                             </b-form-group>
                             <b-form-group label="Mobile: " class=" text-right" label-cols="3" content-cols="8" label-for="mobilePhone">
-                                <VuePhoneNumberInput id="mobilePhone" v-model="business.mob" no-example default-country-code="AU"/>
+                                <VuePhoneNumberInput id="mobilePhone" v-model="business.mobile" no-example default-country-code="AU"/>
                             </b-form-group>
                             <b-form-group class="text-right" label-cols="3" content-cols="8" label="Email:" label-for="contactEmail" invalid-feedback="Must be a valid email" :state="validContactEmail">
                                 <b-form-input id="contactEmail" type="email" name="contactEmail" v-model="business.email" required trim :state="validContactEmail" placeholder="Please enter your Email"/>
                             </b-form-group>
                             <b-form-group class="text-right" label-cols="3" content-cols="8" label="Website:" label-for="companyWebsite" invalid-feedback="Must be a valid website url" :state="validWebsite">
-                                <b-form-input id="companyWebsite" type="text" name="companyWebsite" v-model="business.web" trim :state="validWebsite"/>
+                                <b-form-input id="companyWebsite" type="text" name="companyWebsite" v-model="business.website" trim :state="validWebsite"/>
                             </b-form-group>
                             <br>
                             <hr>
@@ -194,7 +194,7 @@ import axios from 'axios';
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 export default {
-    name: 'BusinessView',
+    name: 'AccomodationView',
     components: {VuePhoneNumberInput },
 
     props: {
@@ -294,7 +294,7 @@ export default {
 
         // Computed boolean value returning whether the business object's company name is between 3 and 80 characters
         validCompanyName() {
-            //return this.business.firm.length >= 8 && this.business.firm.length <= 80
+            //return this.business.name.length >= 8 && this.business.name.length <= 80
             return true
         },
 
@@ -314,7 +314,7 @@ export default {
         // This computed value returns a value on whether or not the business object's 'address' field consists of punctuation, numbers
         // and alphabetic chars between 8 and 255 chars
         validAddress() {
-            return this.business.addr == "" || (/^([a-zA-Z0-9\s\,\/\\\-\.]{8,255})+$/.test(this.business.addr))
+            return this.business.address == "" || (/^([a-zA-Z0-9\s\,\/\\\-\.]{8,255})+$/.test(this.business.address))
         },
 
         // This computed value returns a value on whether or not the business object's 'locality' field consists of punctuation, numbers
@@ -347,7 +347,7 @@ export default {
 
         // Computed boolean value based on whether the business object's 'website' data, if entered, is a valid website
         validWebsite() {
-            return this.business.web == "" || /^(https:|http:|www\.)\S*/.test(this.business.web)
+            return this.business.website == "" || /^(https:|http:|www\.)\S*/.test(this.business.website)
         },
 
         // Computed boolean value based on whether the business object's 'industry3' data, if entered, is less than 40 chars
@@ -514,18 +514,15 @@ export default {
         // prop passed through 'businessId'. If unsuccessful, the user will be send back a page
         async getBusiness() {
             try {
-                await axios.get('http://localhost:8080/api/farmbusiness/getone/'+this.$route.query.id, {
+                await axios.get('http://localhost:8080/api/accomodation/getone/'+this.$route.query.id, {
                     headers: {
                         'Authorization': `Basic ${localStorage.getItem("access_token")}`
                     }
                 }).then((response) => {
-                    console.log(response.data)
                     this.business = response.data
-                    console.log(this.business)
                 })
-                
             } catch (error) {
-                console.log(this.business)
+
             }
 
         },

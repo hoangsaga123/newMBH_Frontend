@@ -80,6 +80,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BusinessView.vue'),
     props: true
   },
+  {
+    path: '/AccomodationView',
+    name: 'AccomodationView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AccomodationView.vue'),
+    props: true
+  },
 ]
 
 const router = new VueRouter({

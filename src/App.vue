@@ -65,6 +65,7 @@ export default {
                 "AddCompany",
                 "Subscribe",
                 "BusinessView",
+                "AccomodationView",
                 "SearchBusinessAndAccomodation",
             ],
 
@@ -82,6 +83,7 @@ export default {
                 "AddCompany",
                 "Subscribe",
                 "BusinessView",
+                'AccomodationView',
                 "SearchBusinessAndAccomodation",
             ],
         };
@@ -135,7 +137,7 @@ export default {
                 }
                 // If USER/ACCOMMODATION is trying to access a page not linked to Accommodation Providers - reroute home
                 else if (
-                    this.accountType == "ACCOMMODATION" &&
+                    this.accountType == "ACCOMODATION" &&
                     this.accommodationSites.indexOf(newName) == -1
                 ) {
                     this.rerouteHome();

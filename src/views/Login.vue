@@ -120,6 +120,8 @@ export default {
                         this.$router.push("/Search")
                     } else if (response.data.accountType == 'BUSINESS') {
                         this.$router.push("/My-Companies")
+                    } else if (response.data.accountType == 'ACCOMODATION') {
+                        this.$router.push("/My-Companies")
                     } else {
                         throw 'Undefined Account Type, please contact support.'
                     }
