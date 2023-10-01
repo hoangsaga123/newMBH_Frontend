@@ -131,6 +131,7 @@ export default {
         // This method calls the vuex store action 'logoutUser' to remove the login details
         // and then redirects to the home/landing page
         logout() {
+            
             this.logoutUser();
             this.$router.push("/");
         },

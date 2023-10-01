@@ -155,7 +155,7 @@ export default {
 
         async getBusinesses() {
             try {
-                await axios.get('http://localhost:8080/api/farmbusiness/search', {
+                await axios.get('http://52.62.124.126:8080/api/farmbusiness/search', {
                     params: {
                         'city': this.$route.query.city,
                         'state': this.$route.query.state,
@@ -194,7 +194,7 @@ export default {
         // If successful will update the 'accomodations' data object with the response data
         async getAccomodations() {
             try {
-                await axios.get('http://localhost:8080/api/accomodation/search', {
+                await axios.get('http://52.62.124.126:8080/api/accomodation/search', {
                     params: {
                         'city': this.$route.query.city,
                         'state': this.$route.query.state,

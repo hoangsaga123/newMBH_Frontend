@@ -838,7 +838,7 @@ export default {
         async requestVerificationToken() {
             this.clearErrors()
             try {
-                await axios.post('http://localhost:8080/api/v1/auth/register', {
+                await axios.post('http://52.62.124.126:8080/api/v1/auth/register', {
                     "firstname": "",
                     "lastname": "",
                     "email": this.accountEmail,
@@ -860,7 +860,7 @@ export default {
         async validateToken() {
             this.clearErrors()
             try {
-                await axios.get('http://localhost:8080/api/v1/auth/verifyEmail', {
+                await axios.get('http://52.62.124.126:8080/api/v1/auth/verifyEmail', {
                     params: {
                         'token': this.verificationToken,
                     }
@@ -919,7 +919,7 @@ export default {
                 }
 
                 try {
-                    const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate', {
+                    const response = await axios.post('http://52.62.124.126:8080/api/v1/auth/authenticate', {
                         "email": this.accountEmail,
                         "password": this.accountPassword
                     });
@@ -942,7 +942,7 @@ export default {
                 if (this.accomodationType) {
 
                     try {
-                        await axios.post('http://localhost:8080/api/accomodation', {
+                        await axios.post('http://52.62.124.126:8080/api/accomodation', {
                             "name": this.name,
                             "abn": this.abn,
                             "acc_note": this.note,
@@ -979,7 +979,7 @@ export default {
                 } else if (this.businessType) {
 
                     try {
-                        await axios.post('http://localhost:8080/api/farmbusiness', {
+                        await axios.post('http://52.62.124.126:8080/api/farmbusiness', {
                             "firm": this.name,
                             "abn": this.abn,
                             "acc_note": this.note,

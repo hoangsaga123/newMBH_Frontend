@@ -514,7 +514,7 @@ export default {
         // prop passed through 'businessId'. If unsuccessful, the user will be send back a page
         async getBusiness() {
             try {
-                await axios.get('http://localhost:8080/api/accomodation/getone/'+this.$route.query.id, {
+                await axios.get('http://52.62.124.126:8080/api/accomodation/getone/'+this.$route.query.id, {
                     headers: {
                         'Authorization': `Basic ${localStorage.getItem("access_token")}`
                     }
