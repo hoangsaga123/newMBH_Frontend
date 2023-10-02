@@ -121,7 +121,7 @@ export default {
 
         // Computed boolean variable returning if the user is logged in as an Accommodation Provider
         accommodationLoggedIn() {
-            return this.loggedInUser && this.accountType == "ACCOMMODATION";
+            return this.loggedInUser && this.accountType == "ACCOMODATION";
         },
 
         ...mapGetters(["loggedInUser", "accountType", "accountId"]),
