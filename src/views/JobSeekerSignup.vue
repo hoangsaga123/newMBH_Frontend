@@ -681,7 +681,7 @@ export default {
         async requestVerificationToken() {
             this.clearErrors()
             try {
-                await axios.post('http://localhost:8080/api/v1/auth/register', {
+                await axios.post('https://3.25.51.142.nip.io/api/v1/auth/register', {
                     "firstname": "",
                     "lastname": "",
                     "email": this.accountEmail,
@@ -703,7 +703,7 @@ export default {
         async validateToken() {
             this.clearErrors()
             try {
-                await axios.get('http://localhost:8080/api/v1/auth/verifyEmail', {
+                await axios.get('https://3.25.51.142.nip.io/api/v1/auth/verifyEmail', {
                     params: {
                         'token': this.verificationToken,
                     }
@@ -724,7 +724,7 @@ export default {
             if (this.validateJobSeekerForm()) {
 
                 try {
-                    const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate', {
+                    const response = await axios.post('https://3.25.51.142.nip.io/api/v1/auth/authenticate', {
                         "email": this.accountEmail,
                         "password": this.accountPassword
                     });
@@ -740,7 +740,7 @@ export default {
 
                     localStorage.setItem('access_token', response.data.access_token)
 
-                    await axios.post('http://localhost:8080/api/v1/auth/updateInfo', {
+                    await axios.post('https://3.25.51.142.nip.io/api/v1/auth/updateInfo', {
                         "email": this.accountEmail,
                         "firstname": this.firstName,
                         "lastname": this.lastName,
