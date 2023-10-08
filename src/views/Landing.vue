@@ -39,7 +39,7 @@
         <div>
             <h1 class="landing-carousel-info">Here are some examples of the important rural work being offered through <span class="landing-info-orange">Many</span>Busy<span class="landing-info-orange">Hands</span></h1>
             <b-carousel id="carousel-1" class="landing-carousel" v-model="slide" :interval="4000" controls indicators background="#ababab" style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
-                <b-carousel-slide caption="Picking blueberries - Coffs Harbour, New South Wales" img-src="@/assets/img/caption/Coffs - Blueberry Farms-2205.jpg"></b-carousel-slide>
+                <b-carousel-slide caption="" img-src="@/assets/img/caption/Poster collage (003).jpg"></b-carousel-slide>
 
                 <b-carousel-slide caption="Moulding handmade chocolate from Australian grown cacao - Charley's Chocolates, Mission Beach, Queensland" img-src="@/assets/img/caption/Charley's Chocolates handmade Australian grown – Mission Beach Queensland .jpg"></b-carousel-slide>
 
@@ -104,9 +104,8 @@
                         </td>
                         <td align="right" class="landing-caption-right">
                             <div class="landing-caption-photo-right">
-                                <img src="@/assets/img/Pearls.png" height="90%" width="90%" />
-                                <p class="landing-caption-text-right">Beautiful pearls from Willie Creek Pearls Farm, Broome, Western Australia.
-                                    A pearl is lovely memento to remember your time in regional Australia</p>
+                                <img src="@/assets/img/caption/A young visitor exploring our biggest city Sydney.jpg" height="90%" width="90%" />
+                                <p class="landing-caption-text-right">A young visitor exploring our biggest city Sydney</p>
                             </div>
                         </td>
                     </tr>
