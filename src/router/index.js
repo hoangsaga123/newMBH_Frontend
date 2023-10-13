@@ -81,6 +81,12 @@ const routes = [
     props: true
   },
   {
+    path: '/My-Profile',
+    name: 'JobSeekerView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/JobSeekerView.vue'),
+    props: true
+  },
+  {
     path: '/AccomodationView',
     name: 'AccomodationView',
     component: () => import(/* webpackChunkName: "about" */ '../views/AccomodationView.vue'),

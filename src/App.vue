@@ -40,6 +40,7 @@ export default {
                 "Landing",
                 "AboutUs",
                 "ContactUs",
+                "JobSeekerView",
                 "TermsAndConditions",
                 "Search",
                 "Seasonality",

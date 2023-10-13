@@ -10,11 +10,11 @@
                         <b-col md="9">
                             <h1 class="text-left mt-3">{{business.name}}</h1>
                         </b-col>
-                        <!-- UPDATE LATER
+                        
                         <b-col>
                             <h1><b-button variant="primary" class="text-right mt-4 ml-4" v-show="businessOwner" @click="changeMode">UPDATE COMPANY</b-button></h1> 
                         </b-col>
-                        -->
+                        
                     </b-row>
                     <hr>
                     <h2></h2>
@@ -25,14 +25,14 @@
                         <b-col md="2"/>
                         <b-col md="8">
                              
-                            <!--<b-badge variant="secondary"  class="p-3 w-100"><h3>Company Details</h3></b-badge>
+                            <b-badge variant="secondary"  class="p-3 w-100"><h3>Company Details</h3></b-badge>
                             
                             <b-list-group class="mt-1 mx-auto">
-                               <b-list-group-item><b>ABN: </b> {{business.abn}}</b-list-group-item> DO NOT HAVE ABN YET
+                               <b-list-group-item><b>ABN: </b> {{business.abn}}</b-list-group-item>
                                  <b-list-group-item v-show="business.abnValidated == 'true'"><b>ABN VALID: </b> YES</b-list-group-item> 
-                                <b-list-group-item v-show="businessOwner"><b>Internal Note: </b> {{business.note1}}</b-list-group-item>
-                                <b-list-group-item><b>Company Scope: </b> {{business.scope}}</b-list-group-item>
-                            </b-list-group>  -->
+                                <b-list-group-item v-show="businessOwner"><b>Internal Note: </b> {{business.acc_note}}</b-list-group-item>
+                                <b-list-group-item><b>Company Scope: </b> {{business.accomodation_type}}</b-list-group-item>
+                            </b-list-group> 
                             <br>
                             <br>
                             <br>
@@ -40,7 +40,7 @@
                             <b-list-group class="mt-1">
                                 <b-list-group-item><b>Accomodation Address: </b> {{business.address}}, {{business.districtsDetails.name}}, {{business.districtsDetails.postcode}}, {{business.districtsDetails.state}}, Australia</b-list-group-item>
                                 <b-list-group-item><b>Company Contact's Name: </b> {{business.contact}}</b-list-group-item>
-                                <!--<b-list-group-item><b>Company Contact's Role: </b> {{business.role}}</b-list-group-item>-->
+                                <b-list-group-item><b>Company Contact's Role: </b> {{business.contact_role}}</b-list-group-item>
                                 <b-list-group-item v-show="business.telephone != ''"><b>LANDLINE #: </b> {{business.telephone}}</b-list-group-item>
                                 <b-list-group-item v-show="business.fax != ''"><b>FAX #: </b> {{business.fax}}</b-list-group-item>
                                 <b-list-group-item v-show="business.mobile != ''"><b>MOBILE #: </b> {{business.mobile}}</b-list-group-item>
@@ -103,7 +103,7 @@
                                 </b-row>
                             </b-form-group>
                             <b-form-group label="Internal Note: " class=" text-right" label-cols="3" content-cols="8" label-for="companyNote" :state="validCompanyNote" invalid-feedback="Note must be less than 255 characters">
-                                <b-form-textarea id="companyNote" v-model="business.note1" trim :state="validCompanyNote"/>
+                                <b-form-textarea id="companyNote" v-model="business.acc_note" trim :state="validCompanyNote"/>
                             </b-form-group>
                             <br>
                             <hr>
@@ -132,7 +132,7 @@
                                 <b-form-input type="text" id="contactName" v-model="business.contact" required trim :state="validContactName"/>
                             </b-form-group>
                             <b-form-group label="Contact's Role: " class=" text-right" label-cols="3" content-cols="5" label-for="contactPosition" :state="validContactPosition" invalid-feedback="Position must be within 3 to 50 characters">
-                                <b-form-input type="text" id="contactPosition" v-model="business.role" required trim :state="validContactPosition" placeholder="HR Manager, etc." />
+                                <b-form-input type="text" id="contactPosition" v-model="business.contact_role" required trim :state="validContactPosition" placeholder="HR Manager, etc." />
                             </b-form-group>
                             <b-form-group label="Landline: " class=" text-right" label-cols="3" content-cols="8" label-for="landlinePhone">
                                 <VuePhoneNumberInput id="landlinePhone" v-model="business.telephone" no-example default-country-code="AU"/>
@@ -152,6 +152,7 @@
                             <br>
                             <hr>
                             <!-- BUSINESS SPECIFIC DETAILS -->
+                            <!-- NO NEED IN ACCOMODATION
                             <h1 class="text-center"><b-badge variant="secondary" class="mb-4 p-3 w-100" size="lg">Business-specific Details</b-badge></h1>
                             <b-form-group label="Horticulutre Industry #1:" class="text-right" label-cols="3" content-cols="5" label-for="companyIndustry1" description="Horticulture, Cotton, Grain, and Wool Industries">
                                 <b-form-select id="companyIndustry1" v-model="business.businessIndustry1" :options="companyIndustryOptions"/>
@@ -171,6 +172,7 @@
                             <b-form-group label="Scope: " class="text-right" label-for="companyScope" label-cols="3" content-cols="8"  :state="validScope" invalid-feedback="Please enter a valid description fo your company up to 255 characters">
                                 <b-form-textarea id="companyScope" v-model="business.scope" trim :state="validScope" placeholder="Please enter any further information about your business here"/>
                             </b-form-group>
+                            -->
                             <!-- BUSINESS UPDATE FORM SUBMIT/BACK BUTTONS -->
                             <b-row>
                                 <b-col>
@@ -277,7 +279,7 @@ export default {
         // Computed boolean variable that returns whether the logged in user's accountId matches the viewed business accountId
         businessOwner() {
             //return this.accountId == this.business.accountId
-            return true
+            return this.business.accEmail == localStorage.getItem("accEmail")
         },
 
         // Computed variable - searching out the related company industry object matched to the current business object's 'industry1' property
@@ -530,21 +532,40 @@ export default {
         // This method takes the input data from the update form and builds a request to the server
         // to update the attached company, provided the data passes the checks in 'validateBusinessForm'
         // Upon success, the user is returned to the non-edit-mode view in this page
-        updateBusiness() {
-            let that = this
+        async updateBusiness() {
             if(this.validateBusinessForm()){
-                let url = this.$BaseURI + '/api/businesses' + '?id=' + this.business.id
-                // AXIOS
-                // this.axios.put(url, this.business)
-                // .then(function (response) {
-                //     that.business = response.data
-                //     that.editMode = false
-                // }).catch(function (error) {
-                //     that.addBusinessFormError("Error in updating Business Company, please try again")
-                // })
+                await axios.post('https://3.25.51.142.nip.io/api/accomodation', {
+                            "id":this.$route.query.id,
+                            "accEmail": localStorage.getItem("accEmail"),
+                            "name": this.business.name,
+                            "abn": this.business.abn,
+                            "acc_note": this.business.acc_note,
 
-                // Mock AXIOS success
-                that.editMode = false
+                            "address": this.business.address,
+                            "districtsDetails": {
+                                "name": this.business.districtsDetails.name,
+                                "postcode": this.business.districtsDetails.postcode,
+                                "state": this.business.districtsDetails.state
+                            },
+
+                            "contact": this.business.contact,
+                            "contact_role": this.business.contact_role,
+                            "telephone": this.business.telephone,
+                            "fax": this.business.fax,
+                            "mobile": this.business.mobile,
+                            "email": this.business.email,
+                            "website": this.business.website,
+
+                            //"accomodation_type": this.business.accomodation_type,
+                            //"capacity": this.business.capacity,
+                        }, {
+                            headers: {
+                                'Authorization': `Basic ${localStorage.getItem("access_token")}`
+                            }
+                        }).then((response) => {
+
+                        });
+                        this.editMode = false
             }
             else {
                 this.addBusinessFormError("Error in updating Business Company, please try again")

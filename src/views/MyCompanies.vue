@@ -155,12 +155,7 @@
                 try {
                     await axios.get('https://3.25.51.142.nip.io/api/farmbusiness/search', {
                         params: {
-                            'city': '',
-                            'state': '',
-                            'postcode': '',
-                            'range': '',
-                            'keyword': '',
-                            'industry': '',
+                            'accEmail': localStorage.getItem("accEmail"),
                             'page': this.currentPage-1
                         },
                         headers: {
@@ -194,12 +189,7 @@
                 try {
                     await axios.get('https://3.25.51.142.nip.io/api/accomodation/search', {
                         params: {
-                            'city': '',
-                            'state': '',
-                            'postcode': '',
-                            'range': '',
-                            'keyword': '',
-                            'type': '',
+                            'accEmail': localStorage.getItem("accEmail"),
                             'page': this.currentPage-1
                         },
                         headers: {

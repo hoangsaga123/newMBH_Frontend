@@ -106,12 +106,14 @@ export default {
                         "password": this.loginPassword
                     });
                     let user = {
+                        "accEmail": this.loginEmail,
                         "accountType": response.data.accountType,
                         "accountId": response.data.accountId,
                         "access_token": response.data.access_token,
                         "refresh_token": response.data.refresh_token
                     }
 
+                    localStorage.setItem('accEmail', this.loginEmail)
                     localStorage.setItem('access_token', response.data.access_token)
 
 

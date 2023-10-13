@@ -67,6 +67,7 @@
                 <b-nav-item :to="{ name: 'Landing' }">Home</b-nav-item>
                 <b-nav-item to="/Seasonality">Seasonality</b-nav-item>
                 <b-nav-item class="nav-item" to="/Search">Search</b-nav-item>
+                <b-nav-item class="nav-item" to="/My-Profile">Profile</b-nav-item>
                 <b-button class="nav-item header-button" @click="logout">Logout</b-button>
             </b-navbar-nav>
             <!-- LOGGED IN BUSINESS NAVBAR -->

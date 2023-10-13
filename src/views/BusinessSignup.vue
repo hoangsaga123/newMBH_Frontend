@@ -933,6 +933,7 @@ export default {
 
                     this.loginUser(user)
 
+                    localStorage.setItem('accEmail', this.accountEmail)
                     localStorage.setItem('access_token', response.data.access_token)
                 } catch (error) {
                     this.loginError = "An error occured, please try again"
@@ -943,6 +944,7 @@ export default {
 
                     try {
                         await axios.post('https://3.25.51.142.nip.io/api/accomodation', {
+                            "accEmail": this.accountEmail,
                             "name": this.name,
                             "abn": this.abn,
                             "acc_note": this.note,
@@ -981,6 +983,7 @@ export default {
                     try {
                         await axios.post('https://3.25.51.142.nip.io/api/farmbusiness', {
                             "firm": this.name,
+                            "accEmail": this.accountEmail,
                             "abn": this.abn,
                             "acc_note": this.note,
 
@@ -992,12 +995,12 @@ export default {
                             },
 
                             "contact": this.contactName,
-                            "contact_role": this.contactPosition,
-                            "telephone": "(" + this.landLineCC + ") " + this.landLinePhone,
+                            "role": this.contactPosition,
+                            "tel": "(" + this.landLineCC + ") " + this.landLinePhone,
                             "fax": "(" + this.faxCC + ") " + this.faxPhone,
-                            "mobile": "(" + this.mobileCC + ") " + this.mobilePhone,
+                            "mob": "(" + this.mobileCC + ") " + this.mobilePhone,
                             "email": this.contactEmail,
-                            "website": this.website,
+                            "web": this.website,
                             "horticulutre_industry_1": this.industry1,
                             "horticulutre_industry_2": this.industry2,
                             "livestock_industry": this.industry3,
@@ -1019,9 +1022,7 @@ export default {
 
                 }
 
-                
-                this.$router.push("/Search")
-                
+                this.$router.push("/My-Companies")
 
             }
         },

@@ -738,6 +738,7 @@ export default {
 
                     this.loginUser(user)
 
+                    localStorage.setItem('accEmail', this.accountEmail)
                     localStorage.setItem('access_token', response.data.access_token)
 
                     await axios.post('https://3.25.51.142.nip.io/api/v1/auth/updateInfo', {
@@ -758,7 +759,7 @@ export default {
                         "rights_to_work": this.workStatus,
                         "haveTFN": this.tfn,
                         "haveBank": this.bankAccount,
-                        "haveSuper": this.superannuation,
+                        "haveSuper": this.superan,
                         "education": this.education.toString(),
                         "about": this.aboutMe,
                         "universityLevel": this.universityLevel
