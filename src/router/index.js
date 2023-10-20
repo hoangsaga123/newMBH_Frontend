@@ -87,6 +87,18 @@ const routes = [
     props: true
   },
   {
+    path: '/Payment-Success',
+    name: 'PaymentSuccess',
+    component: () => import(/* webpackChunkName: "about" */ '../views/PaymentSuccess.vue'),
+    props: true
+  },
+  {
+    path: '/Payment-Failed',
+    name: 'PaymentFailed',
+    component: () => import(/* webpackChunkName: "about" */ '../views/PaymentFailed.vue'),
+    props: true
+  },
+  {
     path: '/AccomodationView',
     name: 'AccomodationView',
     component: () => import(/* webpackChunkName: "about" */ '../views/AccomodationView.vue'),

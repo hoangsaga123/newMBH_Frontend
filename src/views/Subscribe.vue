@@ -177,8 +177,8 @@ export default {
                 price: 'price_1O38yeJJOhRiWl9indWKLkqh', // The id of the recurring price you created in your Stripe dashboard
                 quantity: 1,
             }, ],
-            successURL: 'http://localhost:8080/#/',
-            cancelURL: 'http://localhost:8080/#/',
+            successURL: 'https://manybusyhands.au/#/Payment-Success',
+            cancelURL: 'https://manybusyhands.au/#/Payment-Failed',
 
         }
     },
