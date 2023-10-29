@@ -19,20 +19,24 @@
                         <b-card no-body class="overflow-hidden mb-5" v-for="business in businesses" :key="business.id">
                             <b-row no-gutters>
                                 <b-col md="6">
-                                    <b-card-img src="@/assets/img/olives.jpg" alt="Image" class="rounded-0" img-width="200"></b-card-img>
+                                    <b-card-img src="@/assets/img/caption/Poster collage (003).jpg" alt="Image" class="rounded-0" img-width="200"></b-card-img>
                                 </b-col>
                                 <!-- BUSINESS DETAILS -->
                                 <b-col md="6">
                                     <b-card-body :title="business.name">
                                         <b-card-text>
-                                            <!-- <p><b>ABN: </b>  {{business.abn}}</p> NOT HAVE ABN YET-->
+                                            <p v-show="business.abn != null"><b>ABN: </b> {{business.abn}}</p>
                                             <br>
-                                            <p><b>WEBSITE: </b>
-                                                <router-link :to="business.website">{{business.website}}</router-link>
+                                            <p v-show="business.website != null"><b>WEBSITE: </b>
+                                                <a :href="business.website" target="_blank"> {{ business.website }} </a>
                                             </p>
                                             <p><b>ADDRESS: </b> {{business.addressAddress}}, {{business.addressLocality}}, {{business.addressState}}, {{business.addressPostCode}},{{business.addressCountry}}, </p>
-                                            <!-- <p><b>INTERNAL NOTE: </b>  {{business.note}} </p> NOT HAVE NOTE YET -->
-                                            <p><b>INDUSTRIES: </b> {{business.industries}} </p>
+                                            <p v-show="business.acc_note != null"><b>INTERNAL NOTE: </b> {{business.acc_note}} </p>
+                                            <p v-show="business.industries != null"><b>INDUSTRIES: </b> {{business.industries}} </p>
+                                            <p v-show="business.mob != null"><b>MOBILE PHONE: </b> {{business.mob}} </p>
+                                            <p v-show="business.tel != null"><b>TELEPHONE: </b> {{business.tel}} </p>
+                                            <p v-show="business.fax != null"><b>FAX: </b> {{business.fax}} </p>
+                                            <p v-show="business.email != null"><b>EMAIL: </b> {{business.email}} </p>
                                             <b-row>
                                                 <b-col md="7" />
                                                 <!-- LINK TO BUSINESS FULL VIEW -->
@@ -53,19 +57,23 @@
                         <b-card no-body class="overflow-hidden mb-2" v-for="accomodation in accomodations" :key="accomodation.id">
                             <b-row no-gutters>
                                 <b-col md="6">
-                                    <b-card-img src="@/assets/img/Pearls.png" alt="Image" class="rounded-0" height="350"></b-card-img>
+                                    <b-card-img :src="require(`@/assets/img/randomAccommodation/${accomodation.image}`)" alt="Image" class="rounded-0" height="350"></b-card-img>
                                 </b-col>
                                 <!-- ACCOMODATION DETAILS -->
                                 <b-col md="6">
                                     <b-card-body :title="accomodation.name">
                                         <b-card-text>
-                                            <!-- <p><b>ABN: </b>  {{accomodation.abn}}</p> NOT HAVE ABN YET-->
+                                            <p v-show="accomodation.abn != null"><b>ABN: </b> {{accomodation.abn}}</p>
                                             <br>
-                                            <p><b>WEBSITE: </b>
-                                                <router-link :to="accomodation.website">{{accomodation.website}}</router-link>
+                                            <p v-show="accomodation.website != null"><b>WEBSITE: </b>
+                                                <a :href="accomodation.website" target="_blank"> {{accomodation.website}}</a>
                                             </p>
                                             <p><b>ADDRESS: </b> {{accomodation.addressAddress}}, {{accomodation.addressLocality}}, {{accomodation.addressState}}, {{accomodation.addressPostCode}},{{accomodation.addressCountry}}, </p>
-                                            <!-- <p><b>INTERNAL NOTE: </b>  {{accomodation.note}} </p> NOT HAVE NOTE YET -->
+                                            <p v-show="accomodation.acc_note != null"><b>INTERNAL NOTE: </b> {{accomodation.acc_note}} </p>
+                                            <p v-show="accomodation.mobile != null"><b>MOBILE PHONE: </b> {{accomodation.mobile}} </p>
+                                            <p v-show="accomodation.telephone != null"><b>TELEPHONE: </b> {{accomodation.telephone}} </p>
+                                            <p v-show="accomodation.fax != null"><b>FAX: </b> {{accomodation.fax}} </p>
+                                            <p v-show="accomodation.email != null"><b>EMAIL: </b> {{accomodation.email}} </p>
                                             <!-- <p><b>CAPACITY: </b>  {{accomodation.capacity}} </p> NOT HAVE CAPACITY YET -->
                                             <br>
                                             <b-row>
@@ -110,6 +118,8 @@ export default {
             rows: null,
             itemsPerPage: 5,
 
+            accommodationImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+
         }
     },
 
@@ -141,15 +151,15 @@ export default {
         async loadData(value) {
             this.currentPage = value
             switch (this.$route.query.searchType) {
-            case 'Accomodation':
-                this.getAccomodations()
-                break
-            case 'Business':
-                this.getBusinesses()
-                break
-            default:
-                console.log('nothing')
-                break
+                case 'Accomodation':
+                    this.getAccomodations()
+                    break
+                case 'Business':
+                    this.getBusinesses()
+                    break
+                default:
+                    console.log('nothing')
+                    break
             }
         },
 
@@ -163,7 +173,7 @@ export default {
                         'range': parseInt(this.$route.query.range),
                         'keyword': this.$route.query.keyword,
                         'industry': this.$route.query.industry,
-                        'page': this.currentPage-1
+                        'page': this.currentPage - 1
                     },
                     headers: {
                         'Authorization': `Basic ${localStorage.getItem("access_token")}`
@@ -179,11 +189,18 @@ export default {
                             addressState: item.districtsDetails.state,
                             addressPostCode: item.districtsDetails.postcode,
                             addressCountry: "Australia",
-                            industries: item.category
+                            industries: item.category,
+                            abn: item.abn,
+                            acc_note: item.acc_note,
+                            mob: item.mob,
+                            tel: item.tel,
+                            fax: item.fax,
+                            email: item.email
                         }
                     });
                     this.rows = response.data.totalElements
                 })
+
             } catch (error) {
 
             }
@@ -202,7 +219,7 @@ export default {
                         'range': parseInt(this.$route.query.range),
                         'keyword': this.$route.query.keyword,
                         'type': this.$route.query.type,
-                        'page': this.currentPage-1
+                        'page': this.currentPage - 1
                     },
                     headers: {
                         'Authorization': `Basic ${localStorage.getItem("access_token")}`
@@ -218,8 +235,17 @@ export default {
                             addressState: item.districtsDetails.state,
                             addressPostCode: item.districtsDetails.postcode,
                             addressCountry: "Australia",
+                            abn: item.abn,
+                            acc_note: item.acc_note,
+                            mobile: item.mobile,
+                            email: item.email,
+                            telephone: item.telephone,
+                            fax: item.fax,
+                            image:  this.accommodationImages[Math.floor(Math.random() * this.accommodationImages.length)]
                         }
                     });
+                    this.rows = response.data.totalElements
+
                 })
             } catch (error) {
 
@@ -228,7 +254,7 @@ export default {
     },
 
     created() {
-        this.currentPage=1
+        this.currentPage = 1
         switch (this.$route.query.searchType) {
             case 'Accomodation':
                 this.getAccomodations()
@@ -241,5 +267,7 @@ export default {
                 break
         }
     },
+
+    
 };
 </script>
