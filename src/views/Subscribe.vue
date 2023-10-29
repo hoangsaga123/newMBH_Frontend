@@ -108,8 +108,8 @@
         <div class="subscribe-options">
             <div class="subscribe-options-child">
                 <div class="bg-white p-5 rounded-lg shadow">
-                    <h1 class="h4 text-uppercase font-weight-bold  mb-4">89₵ A DAY</h1>
-                    <h2 class="h2 font-weight-bold text-primary">$25<span class="text-small text-primary font-weight-normal ml-4">/ 28 days</span></h2>
+                    <h1 class="h4 text-uppercase font-weight-bold  mb-4">$1 A DAY</h1>
+                    <h2 class="h2 font-weight-bold text-primary">$30<span class="text-small text-primary font-weight-normal ml-4">/ 30 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
                     <stripe-checkout ref="checkoutRef" mode="subscription" :pk="publishableKey" :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL" @loading="v => loading = v" />
                     <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
