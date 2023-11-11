@@ -338,7 +338,7 @@ export default {
 
         async getJobAdvertisment() {
             try {
-                await axios.get('http://localhost:8080/api/jobadvertisment/search', {
+                await axios.get('https://3.25.51.142.nip.io/api/jobadvertisment/search', {
                     params: {
                         'itemsPerPage': this.itemsPerPage,
                         'page': this.currentPage - 1,
@@ -396,7 +396,7 @@ export default {
 
         async updateJob() {
             try {
-                await axios.post('http://localhost:8080/api/jobadvertisment', {
+                await axios.post('https://3.25.51.142.nip.io/api/jobadvertisment', {
                     "id": this.id,
                     "companyName": this.companyName,
                     "title": this.title,
@@ -431,7 +431,7 @@ export default {
 
         async addJob() {
             try {
-                await axios.post('http://localhost:8080/api/jobadvertisment', {
+                await axios.post('https://3.25.51.142.nip.io/api/jobadvertisment', {
                     "companyName": this.companyName,
                     "title": this.title,
                     "location": this.location,
