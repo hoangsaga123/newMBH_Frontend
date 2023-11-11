@@ -133,10 +133,9 @@ export default {
             return (this.validName && this.validEmail && this.validSubject && this.validMessage)
         },
 
-        successSubmit(){
+        successSubmit() {
             return (this.successMessage.length > 0)
         }
-
 
     },
 

@@ -50,9 +50,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
   },
   {
-    path: '/SearchBusinessAndAccomodation',
-    name: 'SearchBusinessAndAccomodation',
-    component: () => import(/* webpackChunkName: "about" */ '../views/SearchBusinessAndAccomodation.vue')
+    path: '/SearchResult',
+    name: 'SearchResult',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SearchResult.vue')
   },
   {
     path: '/Subscribe',
@@ -102,6 +102,12 @@ const routes = [
     path: '/AccomodationView',
     name: 'AccomodationView',
     component: () => import(/* webpackChunkName: "about" */ '../views/AccomodationView.vue'),
+    props: true
+  },
+  {
+    path: '/Advertisment',
+    name: 'Advertisment',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Advertisment.vue'),
     props: true
   },
 ]

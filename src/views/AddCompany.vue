@@ -724,14 +724,12 @@ export default {
         async submitAccount() {
             this.successfulPost = false
             if (this.validateBusinessForm()) {
-            
-                
 
                 if (this.accomodationType) {
 
                     try {
                         await axios.post('https://3.25.51.142.nip.io/api/accomodation', {
-                            "accEmail": this.accountEmail,
+                            "accEmail": localStorage.getItem("accEmail"),
                             "name": this.name,
                             "abn": this.abn,
                             "acc_note": this.note,
@@ -770,7 +768,7 @@ export default {
                     try {
                         await axios.post('https://3.25.51.142.nip.io/api/farmbusiness', {
                             "firm": this.name,
-                            "accEmail": this.accountEmail,
+                            "accEmail": localStorage.getItem("accEmail"),
                             "abn": this.abn,
                             "acc_note": this.note,
 
@@ -808,8 +806,6 @@ export default {
                     }
 
                 }
-
-                
 
                 // Mocking the results of a successful Company Add through axios
                 this.successfulPost = true

@@ -44,13 +44,18 @@
                                 </b-col>
                             </b-row>
                             <b-row class="mb-3 p-1">
-                                <b-col md="6" v-show="searchType.type != 'Accomodation'">
+                                <b-col md="6" v-show="searchType.type == 'Business'">
                                     <b-form-group label-for="industrySelection" label="Industry: " class="text-right" label-cols="3" content-cols="9">
                                         <b-form-select id="industrySelection" v-model="searchIndustry" :options="industryOptions" />
                                     </b-form-group>
                                 </b-col>
+                                <b-col md="6" v-show="searchType.type == 'Job'">
+                                    <b-form-group label-for="titleSearch" label="Title:" class="text-right" label-cols="3" content-cols="9" :state="validKeywords" invalid-feedback="Only valid characters, alphabetic or in [-, ', -, /, \, .]">
+                                        <b-form-input id="titleSearch" v-model="searchTitle" trim :state="validKeywords" placeholder="Enter relevant title" />
+                                    </b-form-group>
+                                </b-col>
                                 <b-col md="6">
-                                    <b-form-group label-for="keywordsSearch" label="Keywords:" class="text-right" label-cols="3" content-cols="9" :state="validKeywords" invalid-feedback="Only valid characters, alphabetic or in [-, ', -, /, \, .]">
+                                    <b-form-group v-show="searchType.type != 'Job'" label-for="keywordsSearch" label="Keywords:" class="text-right" label-cols="3" content-cols="9" :state="validKeywords" invalid-feedback="Only valid characters, alphabetic or in [-, ', -, /, \, .]">
                                         <b-form-input id="keywordsSearch" v-model="searchKeywords" trim :state="validKeywords" placeholder="Enter relevant keywords" />
                                     </b-form-group>
                                 </b-col>
@@ -104,6 +109,7 @@ export default {
             searchEndDate: null,
             searchAccomType: null,
             tabIndex: 1,
+            searchTitle: "",
 
             // Array of different search types & tabs
             searchTypes: [{
@@ -405,54 +411,25 @@ export default {
                 let queryType = this.searchTypes[this.tabIndex]["type"]
                 // Build the search params
                 let searchParams = {
-                    'city':this.searchCity,
-                    'state':this.searchState,
-                    'postcode':this.searchPostCode,
+                    'city': this.searchCity,
+                    'state': this.searchState,
+                    'postcode': this.searchPostCode,
                     'range': parseInt(this.searchRange),
                     'keyword': this.searchKeywords,
                     'type': this.searchAccomType,
-                    'industry':this.searchIndustry,
-                    'page':0,
+                    'industry': this.searchIndustry,
+                    'page': 0,
+                    'title': this.searchTitle,
+                    'startDate': this.searchStartDate,
+                    'endDate': this.searchEndDate,
                     'searchType': queryType
                 }
 
-                this.$router.push({path:"/SearchBusinessAndAccomodation", query:searchParams})
+                this.$router.push({
+                    path: "/SearchResult",
+                    query: searchParams
+                })
 
-                
-
-                // Create the correct url for the search type
-                // let url = this.$BaseURI + "/search/"
-                // let urlType = ""
-                // switch (queryType) {
-                //     case 'Job':
-                //         searchParams["industry"] = this.searchIndustry
-                //         searchParams["startDate"] = this.searchStartDate
-                //         searchParams["endDate"] = this.searchEndDate
-                //         urlType = "jobs"
-                //         break
-                //     case 'Accomodation':
-                //         urlType = "accommodations"
-                //         searchParams["accomType"] = this.searchAccomType
-                //         break
-                //     case 'Business':
-                //         urlType = "businesses"
-                //         searchParams["industry"] = this.searchIndustry
-                //         break
-                //     default:
-                //         this.searchError = "Unrecognized search type, please try again"
-                //         break
-                // }
-                // url = url + urlType + "/query"
-
-                // AXIOS 
-                // this.axios.get(url, { params: searchParams })
-                //     .then(function(response) {
-                //     let searchdata = response.data
-                //     // Do something and go somewhere with the stuff
-                //
-                //     }).catch(function (error) {
-                //         that.searchError = "An error occured during your request, please try again"
-                //     })
             } else {
                 this.searchError = "An error occured during your request, please try again"
             }

@@ -67,7 +67,7 @@
                         </b-form-group>
 
                         <b-alert variant="danger" v-if="!noPasswordError" show>{{passwordError}}</b-alert>
-                        
+
                         <hr class="mb-3">
                         <b-form-group :state="validPassword" class="mt-5 p-4 text-right" invalid-feedback="Please enter a valid password between 6 and 20 characters">
                             <b-row>

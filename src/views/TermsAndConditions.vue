@@ -9,7 +9,7 @@
                 <h3 class="mt-1 mb-2">Website Terms and Conditions</h3>
                 <hr>
                 <p>This website is owned and operated by Geoffrey Frank Michael Quinn, trading as ‘ManyBusyHands’ (ABN 49 328 354 227). By using our Website and the Services and information offered on our Website, you are agreeing to these Terms. Please read these Terms carefully. If you do not agree to be bound by all of these Terms you must not use or sign up to any Electronic Service and must cease accessing or using the Website immediately.</p>
-				<p>You are free to contact ManyBusyHands at any time using our contact details with any queries regarding our Electronic Services or these Terms.</p>
+                <p>You are free to contact ManyBusyHands at any time using our contact details with any queries regarding our Electronic Services or these Terms.</p>
                 <ol type="1" class="text-left">
                     <!-- #1 Definitions -->
                     <h3>
@@ -151,21 +151,21 @@
                     </p>
                     <br>
 
-					<h3>
-						<li>Financial Information</li>
-					</h3>
-					<p class="mt-3 mb-3">
-						No financial information belonging to or relating to either any individual or any business using our paid-for services is stored on this website. What information that is required for the payment of paid for services is stored on and within the platforms by the payment portals used by us from time to time. These are but are not necessarily restricted to financial sector businesses such as Xero Limited and the Commonwealth Bank of Australia.
-					</p>
-					<br>
+                    <h3>
+                        <li>Financial Information</li>
+                    </h3>
+                    <p class="mt-3 mb-3">
+                        No financial information belonging to or relating to either any individual or any business using our paid-for services is stored on this website. What information that is required for the payment of paid for services is stored on and within the platforms by the payment portals used by us from time to time. These are but are not necessarily restricted to financial sector businesses such as Xero Limited and the Commonwealth Bank of Australia.
+                    </p>
+                    <br>
 
-					<h3>
-						<li>Refund Policy</li>
-					</h3>
-					<p class="mt-3 mb-3">
-						As the service being provided to either an individual or a business is an instant electronic service no refunds for the service purchased can or will be made.
-					</p>
-					<br>
+                    <h3>
+                        <li>Refund Policy</li>
+                    </h3>
+                    <p class="mt-3 mb-3">
+                        As the service being provided to either an individual or a business is an instant electronic service no refunds for the service purchased can or will be made.
+                    </p>
+                    <br>
 
                 </ol>
             </div>

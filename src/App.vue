@@ -1,24 +1,31 @@
 <template>
-    <div>
-        <!-- APP VIEW -->
-        <Header class="header"/>
-        <body class="body">
-            <div class="page-container">
-                <!-- LANDING BACKGROUND IMAGE CAROUSEL -->
-                <router-view class="main-content"></router-view>
-            </div>
-        </body>
-        <Footer class="footer"/>
-    </div>
+<div>
+    <!-- APP VIEW -->
+    <Header class="header" />
+
+    <body class="body">
+        <div class="page-container">
+            <!-- LANDING BACKGROUND IMAGE CAROUSEL -->
+            <router-view class="main-content"></router-view>
+        </div>
+    </body>
+    <Footer class="footer" />
+</div>
 </template>
+
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import { mapGetters } from "vuex";
+import {
+    mapGetters
+} from "vuex";
 export default {
     name: "AppFrame",
 
-    components: { Header, Footer },
+    components: {
+        Header,
+        Footer
+    },
 
     data() {
         return {
@@ -31,6 +38,7 @@ export default {
                 "TermsAndConditions",
                 "BusinessSignup",
                 "JobSeekerSignup",
+                'Advertisment',
                 "AccommodationSignup",
                 "Subscribe",
             ],
@@ -51,7 +59,7 @@ export default {
                 "BusinessView",
                 "PaymentSuccess",
                 "PaymentFailed",
-                "SearchBusinessAndAccomodation",
+                "SearchResult",
             ],
 
             // Array of page names that specify which sites a LOGGED IN USER (Business) can visit (router protection)
@@ -71,7 +79,8 @@ export default {
                 "PaymentSuccess",
                 "PaymentFailed",
                 "AccomodationView",
-                "SearchBusinessAndAccomodation",
+                'Advertisment',
+                "SearchResult",
             ],
 
             // Array of page names that specify which sites a LOGGED IN USER (Accommodation) can visit (router protection)
@@ -91,7 +100,8 @@ export default {
                 "PaymentSuccess",
                 "PaymentFailed",
                 'AccomodationView',
-                "SearchBusinessAndAccomodation",
+                'Advertisment',
+                "SearchResult",
             ],
         };
     },

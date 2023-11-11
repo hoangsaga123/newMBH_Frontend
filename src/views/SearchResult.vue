@@ -86,10 +86,38 @@
                         </b-card>
                         <br>
                     </b-container>
+                    <!-- JOBS ATTACHED -->
+                    <b-container>
+                        <h1 class="text-left">
+                            <b-badge variant="secondary" class="mb-3 p-3 py-4 w-100" size="lg">Job Advertisment List</b-badge>
+                        </h1>
+                        <b-card no-body class="overflow-hidden mb-5" v-for="job in jobAdvertisments" :key="job.id">
+                            <b-row no-gutters>
+                                <b-col md="6">
+                                    <b-card-body :title="job.title">
+                                        <b-card-text>
+                                            <p v-show="job.companyName != null"><b>COMPANY NAME: </b> {{job.companyName}}</p>
+                                            <p><b>LOCATION: </b> {{job.location}}, {{job.districtsDetails.name}}, {{job.districtsDetails.state}}, {{job.districtsDetails.postcode}} </p>
+                                            <p v-show="job.terms != null"><b>TERMS: </b> {{job.terms}} </p>
+                                            <!--<p v-show="job.description != null"><b>DESCRIPTION: </b> {{job.description}} </p>-->
+                                            <p v-show="job.contactEmail != null"><b>CONTACT EMAIL: </b> {{job.contactEmail}} </p>
+                                            <p v-show="job.contactPhone != null"><b>CONTACT PHONE: </b> {{job.contactPhone}} </p>
+                                            <p v-show="job.salary != null"><b>SALARY: </b> ${{job.salary}} </p>
+                                            <p v-show="job.startDate != null & job.endDate != null"><b>START DATE: </b> {{job.startDate}} <b>END DATE: </b>{{job.endDate}}</p>
+
+                                        </b-card-text>
+                                    </b-card-body>
+                                </b-col>
+                                <b-col md="6">
+                                    <p v-show="job.description != null"><b>DESCRIPTION: </b> </p>
+                                    <p v-for="(paragraph, pIndex) in splitJoin(job.description)" :key="pIndex">{{ paragraph }}</p>
+                                </b-col>
+                            </b-row>
+                        </b-card>
+                    </b-container>
                     <!-- NO COMPANIES ATTACHED SECTION -->
                     <b-container v-show="noCompanies">
-                        <b-alert variant="warning" show> It seems there are no companies attached to your account. Please join up your company <b-button variant="success" to="/Add-Company"> HERE </b-button>
-                        </b-alert>
+                        <b-alert variant="warning" show> It looks like there were no results for your search.</b-alert>
                     </b-container>
                 </b-container>
                 <b-pagination v-model="currentPage" class="mx-auto" :total-rows="rows" :per-page="itemsPerPage" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" @change="loadData" />
@@ -106,10 +134,11 @@ import {
 } from 'vuex';
 import axios from 'axios'
 export default {
-    name: 'SearchBusinessAndAccomodation',
+    name: 'SearchResult',
 
     data() {
         return {
+            jobAdvertisments: [],
             businesses: [],
 
             accomodations: [],
@@ -134,9 +163,13 @@ export default {
             return this.accomodations.length > 0
         },
 
+        jobsAttached() {
+            return this.jobAdvertisments.length > 0
+        },
+
         // Computed value to determine if no companies are attached to this account (if a user deletes all of their companies)
         noCompanies() {
-            return this.businessesAttached == false && this.accommodationsAttached == false
+            return this.businessesAttached == false && this.accommodationsAttached == false && this.jobsAttached == false
         },
 
         ...mapGetters([
@@ -148,6 +181,13 @@ export default {
         // This function retrieves all businesses attached to the user's accountId, via an AXIOS request to the server
         // If successful will update the 'businesses' data object with the response data
 
+        splitJoin(theText) {
+            return theText
+                .split('\n')
+                .filter((paragraph) => paragraph.trim() !== '')
+                .map((paragraph) => `   ${paragraph}`);
+        },
+
         async loadData(value) {
             this.currentPage = value
             switch (this.$route.query.searchType) {
@@ -157,9 +197,37 @@ export default {
                 case 'Business':
                     this.getBusinesses()
                     break
+                case 'Job':
+                    this.getJobs()
+                    break
                 default:
                     console.log('nothing')
                     break
+            }
+        },
+
+        async getJobs() {
+            try {
+                await axios.get('https://3.25.51.142.nip.io/api/jobadvertisment/search', {
+                    params: {
+                        'title': this.$route.query.title,
+                        'city': this.$route.query.city,
+                        'state': this.$route.query.state,
+                        'postcode': this.$route.query.postcode,
+                        'startDate': this.$route.query.startDate,
+                        'endDate': this.$route.query.endDate,
+                        'page': this.currentPage - 1,
+                    },
+                    headers: {
+                        'Authorization': `Basic ${localStorage.getItem("access_token")}`
+                    }
+                }).then((response) => {
+                    this.jobAdvertisments = response.data.content
+                    this.rows = response.data.totalElements
+                })
+
+            } catch (error) {
+
             }
         },
 
@@ -241,7 +309,7 @@ export default {
                             email: item.email,
                             telephone: item.telephone,
                             fax: item.fax,
-                            image:  this.accommodationImages[Math.floor(Math.random() * this.accommodationImages.length)]
+                            image: this.accommodationImages[Math.floor(Math.random() * this.accommodationImages.length)]
                         }
                     });
                     this.rows = response.data.totalElements
@@ -262,12 +330,14 @@ export default {
             case 'Business':
                 this.getBusinesses()
                 break
+            case 'Job':
+                this.getJobs()
+                break
             default:
                 console.log('nothing')
                 break
         }
     },
 
-    
 };
 </script>

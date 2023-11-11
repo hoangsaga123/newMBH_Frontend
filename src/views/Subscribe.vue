@@ -267,7 +267,6 @@ export default {
             //         }        
             //     })
 
-
             //this.$router.push("/JobSeeker-Payment")
         }
     }

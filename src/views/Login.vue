@@ -116,7 +116,6 @@ export default {
                     localStorage.setItem('accEmail', this.loginEmail)
                     localStorage.setItem('access_token', response.data.access_token)
 
-
                     this.loginUser(user)
                     if (response.data.accountType == 'USER') {
                         this.$router.push("/Search")
