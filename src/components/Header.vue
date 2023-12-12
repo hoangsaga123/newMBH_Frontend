@@ -115,7 +115,6 @@ export default {
         checkMobile() {
             // Check if the screen width is less than a certain value (e.g., 768px)
             this.isNotMobile = window.innerWidth > 1500;
-            console.log(window.innerWidth)
         },
 
         ...mapActions(["logoutUser"]),
