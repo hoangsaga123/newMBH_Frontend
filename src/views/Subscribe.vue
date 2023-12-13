@@ -574,14 +574,6 @@ export default {
         border-radius: 3px;
     }
 
-    select {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
     label {
         margin-bottom: 10px;
         display: block;
