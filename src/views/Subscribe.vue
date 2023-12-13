@@ -111,7 +111,6 @@
                     <h1 class="h4 text-uppercase font-weight-bold  mb-4">$1 A DAY</h1>
                     <h2 class="h2 font-weight-bold text-primary">$30<span class="text-small text-primary font-weight-normal ml-4">/ 30 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
-                    <stripe-checkout ref="checkoutRef" mode="subscription" :pk="publishableKey" :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL" @loading="v => loading = v" />
                     <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
                 </div>
             </div>
@@ -149,6 +148,95 @@
             </div>
         </div>
     </div>
+
+    <div v-show="showNavigator" class="popup">
+        <div class="popup-inner">
+            <span class="closePopupBtn" @click="closePopup">X</span>
+            <img src="@/assets/img/logo2.jpeg" alt="ManyBusyHands Logo" />
+            <h2>Welcome to ManyBusyHands!</h2>
+            <p>To access this feature, please sign in or create an account.</p>
+            <b-button id="signInBtn" to="/Login">Sign in</b-button>
+        </div>
+    </div>
+
+    <div v-show="showPayment" class="popup">
+        <div class="popup-inner">
+            <span class="closePopupBtn" @click="closePopup">X</span>
+            <div class="row">
+                <div class="col-75">
+                    <div class="container">
+                        <form @submit.prevent="handleSubmit">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <h3>Billing Address</h3>
+                                    <label for="fname">
+                                        <font-awesome-icon icon="fa fa-user" /> Full Name</label>
+                                    <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+                                    <label for="email">
+                                        <font-awesome-icon icon="fa fa-envelope" /> Email</label>
+                                    <input type="text" id="email" name="email" placeholder="john@example.com">
+                                    <label for="adr">
+                                        <font-awesome-icon icon="fa fa-address-card" /> Address 1</label>
+                                    <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                                    <label for="city">
+                                        <font-awesome-icon icon="fa fa-institution" /> Address 2 (Optional)</label>
+                                    <input type="text" id="city" name="city" placeholder="123 Canley Vale">
+
+                                    <div class="row">
+                                        <div class="col-50">
+                                            <label for="state">State</label>
+                                            <b-form-select id="companyState" v-model="state" :options="stateOptions" />
+                                        </div>
+                                        <div class="col-50">
+                                            <label for="zip">Zip</label>
+                                            <input type="number" id="zip" name="zip" placeholder="2166">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-50">
+                                    <h3>Payment</h3>
+                                    <label for="fname">Accepted Cards</label>
+                                    <div class="icon-container">
+                                        <span>
+                                            <font-awesome-icon icon="fa-brands fa-cc-visa" /></span>
+                                        <span>
+                                            <font-awesome-icon icon="fa-brands fa-cc-mastercard" /></span>
+                                        <span>
+                                            <font-awesome-icon icon="fa-brands fa-cc-paypal" /></span>
+                                        <span>
+                                            <font-awesome-icon icon="fa-brands fa-cc-apple-pay" /></span>
+                                    </div>
+                                    <label for="cname">Name on Card</label>
+                                    <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                                    <label for="ccnum">Credit card number</label>
+                                    <input type="number" id="ccnum" name="cardnumber" placeholder="1111 2222 3333 4444">
+                                    <label for="expmonth">Exp Month</label>
+                                    <b-form-select id="expmonth" v-model="expMonth" :options="expMonthOptions" />
+                                    <div class="row">
+                                        <div class="col-50">
+                                            <label for="expyear">Exp Year</label>
+                                            <input type="number" min="1900" max="2099" step="1" value="2023" id="expyear" name="expyear">
+                                        </div>
+                                        <div class="col-50">
+                                            <label for="cvv">CVC</label>
+                                            <input type="number" id="cvc" name="cvc" placeholder="352">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <label>
+                                <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                            </label>
+                            <input type="submit" value="Continue to checkout" class="btn">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </template>
 
@@ -163,22 +251,109 @@ export default {
     name: 'Subscribe',
 
     components: {
-        StripeCheckout,
+
     },
 
     data() {
-        this.publishableKey = "pk_test_51O35y3JJOhRiWl9iH2UqT1Et0pEKwRwf7MU8MTRkFOR8K2Wu2xG7rJnfPC6pdPRcrqHFR2Ehmj3vIQFgIn9tpkiF00CyzbeBpy"
+
         return {
             // Variable containing any subscription error that occurs
             subscribeError: "",
+            showNavi: false,
+
+            state: "",
 
             loading: false,
-            lineItems: [{
-                price: 'price_1O38yeJJOhRiWl9indWKLkqh', // The id of the recurring price you created in your Stripe dashboard
-                quantity: 1,
-            }, ],
-            successURL: 'https://manybusyhands.au/#/Payment-Success',
-            cancelURL: 'https://manybusyhands.au/#/Payment-Failed',
+
+            expMonth: "",
+
+            expMonthOptions: [{
+                    text: "January",
+                    value: "01"
+                },
+                {
+                    text: "February",
+                    value: "02"
+                },
+                {
+                    text: "March",
+                    value: "03"
+                },
+                {
+                    text: "April",
+                    value: "04"
+                },
+                {
+                    text: "May",
+                    value: "05"
+                },
+                {
+                    text: "June",
+                    value: "06"
+                },
+                {
+                    text: "July",
+                    value: "07"
+                },
+                {
+                    text: "August",
+                    value: "08"
+                },
+                {
+                    text: "September",
+                    value: "09"
+                },
+                {
+                    text: "October",
+                    value: "10"
+                },
+                {
+                    text: "November",
+                    value: "11"
+                },
+                {
+                    text: "December",
+                    value: "12"
+                },
+            ],
+
+            stateOptions: [{
+                    value: null,
+                    text: 'Please select a state'
+                },
+                {
+                    value: 'NSW',
+                    text: 'NSW'
+                },
+                {
+                    value: 'QLD',
+                    text: 'QLD'
+                },
+                {
+                    value: 'VIC',
+                    text: 'VIC'
+                },
+                {
+                    value: 'NT',
+                    text: 'NT'
+                },
+                {
+                    value: 'ACT',
+                    text: 'ACT'
+                },
+                {
+                    value: 'WA',
+                    text: 'WA'
+                },
+                {
+                    value: 'SA',
+                    text: 'SA'
+                },
+                {
+                    value: 'TAS',
+                    text: 'TAS'
+                },
+            ],
 
         }
     },
@@ -187,6 +362,14 @@ export default {
         // Computed boolean value that returns if the user is a logged in JobSeeker
         canSubscribe() {
             return this.loggedInUser && this.accountType == 'USER'
+        },
+
+        showNavigator() {
+            return !this.canSubscribe && this.showNavi
+        },
+
+        showPayment() {
+            return this.canSubscribe && this.showNavi
         },
 
         // Computed boolean variable that returns if there is no current subscription error 
@@ -202,53 +385,62 @@ export default {
     },
 
     methods: {
+
+        closePopup() {
+            this.showNavi = false;
+        },
+
+        handleSubmit(event) {
+            event.preventDefault();
+        },
+
         // This method sends a request to the server, construction a subscription object using the subscription
         // option selected by the user, the user's accountId and generated start and end subscription databases
         // If successful, this method redirects the user to the search page. This method takes one parameter 'level' describing subscription level
         subscribe(level) {
 
-            this.$refs.checkoutRef.redirectToCheckout()
+            this.showNavi = true;
 
-            let that = this
-            let url = this.$BaseURI + '/api/subscriptions'
-            this.subscribeError = ""
-            // Get and format Subscription start and end dates
-            let today = new Date()
-            let todayString = today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getYear()
-            let futureDate = new Date()
-            let subscriptionDays = 0
-            // Calculate number of subcription days by subscription level
-            switch (level) {
-                case 'month':
-                    subscriptionDays = 28
-                    break
-                case 'quarter-year':
-                    subscriptionDays = 90
-                    break
-                case 'half-year':
-                    subscriptionDays = 180
-                    break
-                case 'three-quarter-year':
-                    subscriptionDays = 270
-                    break
-                case 'year':
-                    subscriptionDays = 365
-                    break
-                default:
-                    console.log("Unexpected subscription level returned: " + level + ". Please try again")
-                    return
-            }
-            futureDate.setDate(futureDate.getDate() + subscriptionDays)
-            let futureString = futureDate.getDate() + "-" + (futureDate.getMonth() + 1) + "-" + futureDate.getFullYear()
+            // let that = this
+            // let url = this.$BaseURI + '/api/subscriptions'
+            // this.subscribeError = ""
+            // // Get and format Subscription start and end dates
+            // let today = new Date()
+            // let todayString = today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getYear()
+            // let futureDate = new Date()
+            // let subscriptionDays = 0
+            // // Calculate number of subcription days by subscription level
+            // switch (level) {
+            //     case 'month':
+            //         subscriptionDays = 28
+            //         break
+            //     case 'quarter-year':
+            //         subscriptionDays = 90
+            //         break
+            //     case 'half-year':
+            //         subscriptionDays = 180
+            //         break
+            //     case 'three-quarter-year':
+            //         subscriptionDays = 270
+            //         break
+            //     case 'year':
+            //         subscriptionDays = 365
+            //         break
+            //     default:
+            //         console.log("Unexpected subscription level returned: " + level + ". Please try again")
+            //         return
+            // }
+            // futureDate.setDate(futureDate.getDate() + subscriptionDays)
+            // let futureString = futureDate.getDate() + "-" + (futureDate.getMonth() + 1) + "-" + futureDate.getFullYear()
 
-            let data = {
-                'subscription': {
-                    'accountId': this.accountId,
-                    'description': level,
-                    'startDate': todayString,
-                    'endDate': futureString
-                }
-            }
+            // let data = {
+            //     'subscription': {
+            //         'accountId': this.accountId,
+            //         'description': level,
+            //         'startDate': todayString,
+            //         'endDate': futureString
+            //     }
+            // }
 
             // AXIOS
             // this.axios.post(url, data) 
@@ -272,3 +464,162 @@ export default {
     }
 };
 </script>
+
+<style>
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .popup-inner {
+        background: #FFF;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        .closePopupBtn {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #c2baba;
+            /* Gray color */
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #333;
+        margin: 20px;
+    }
+
+    b-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: -ms-flexbox;
+        /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap;
+        /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+    }
+
+    .col-25 {
+        -ms-flex: 25%;
+        /* IE10 */
+        flex: 25%;
+    }
+
+    .col-50 {
+        -ms-flex: 50%;
+        /* IE10 */
+        flex: 50%;
+    }
+
+    .col-75 {
+        -ms-flex: 75%;
+        /* IE10 */
+        flex: 75%;
+    }
+
+    .col-25,
+    .col-50,
+    .col-75 {
+        padding: 0 16px;
+    }
+
+    .container {
+        background-color: #f2f2f2;
+        padding: 5px 20px 15px 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+    }
+
+    input[type=text],
+    input[type=number] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    select {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    label {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .icon-container {
+        margin-bottom: 20px;
+        padding: 7px;
+        font-size: 30px;
+
+        span {
+            padding-right: 7px;
+        }
+    }
+
+    .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        color: #2196F3;
+    }
+
+    hr {
+        border: 1px solid lightgrey;
+    }
+
+}
+</style>
