@@ -181,11 +181,11 @@
                 </a>
             </div>
             <div>
-                <a href="https://www.une.edu.au/" target="_blank">
-                    <img src="@/assets/img/logos/SRI.png" center height="20%" width="20%" />
+                <a href="https://www.blazeaid.com.au/" target="_blank">
+                    <img src="@/assets/img/logos/blazeaid-logo.svg" center height="20%" width="20%" />
                 </a>
-                <a href="https://iworkfor.nsw.gov.au/" target="_blank">
-                    <img src="@/assets/img/logos/JobsforNSWlogo.png" center height="40%" width="40%" />
+                <a href="https://www.awia.org.au/" target="_blank">
+                    <img src="@/assets/img/logos/awia-logo.png" center height="25%" width="25%" />
                 </a>
             </div>
         </div>
@@ -220,3 +220,8 @@ export default {
     }
 };
 </script>
+<style>
+a {
+    padding: 5px;
+}
+</style>
