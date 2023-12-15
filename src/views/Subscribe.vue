@@ -197,33 +197,9 @@
 
                                 <div class="col-50">
                                     <h3>Payment</h3>
-                                    <label for="fname">Accepted Cards</label>
-                                    <div class="icon-container">
-                                        <span>
-                                            <font-awesome-icon icon="fa-brands fa-cc-visa" /></span>
-                                        <span>
-                                            <font-awesome-icon icon="fa-brands fa-cc-mastercard" /></span>
-                                        <span>
-                                            <font-awesome-icon icon="fa-brands fa-cc-paypal" /></span>
-                                        <span>
-                                            <font-awesome-icon icon="fa-brands fa-cc-apple-pay" /></span>
-                                    </div>
-                                    <label for="cname">Name on Card</label>
-                                    <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                                    <label for="ccnum">Credit card number</label>
-                                    <input type="number" id="ccnum" name="cardnumber" placeholder="1111 2222 3333 4444">
-                                    <label for="expmonth">Exp Month</label>
-                                    <b-form-select id="expmonth" v-model="expMonth" :options="expMonthOptions" />
-                                    <div class="row">
-                                        <div class="col-50">
-                                            <label for="expyear">Exp Year</label>
-                                            <input type="number" min="1900" max="2099" step="1" value="2023" id="expyear" name="expyear">
-                                        </div>
-                                        <div class="col-50">
-                                            <label for="cvv">CVC</label>
-                                            <input type="number" id="cvc" name="cvc" placeholder="352">
-                                        </div>
-                                    </div>
+                                    <button data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Jasmine Green Tea" data-description="Smooth tea with a rich jasmine bouquet" data-reference="99999" data-amount="3000" data-color="#12B830">
+                                        Buy Now
+                                    </button>
                                 </div>
 
                             </div>
@@ -242,9 +218,6 @@
 
 <script>
 import {
-    StripeCheckout
-} from '@vue-stripe/vue-stripe';
-import {
     mapGetters
 } from 'vuex';
 export default {
@@ -252,6 +225,13 @@ export default {
 
     components: {
 
+    },
+
+    mounted() {
+        const script = document.createElement('script');
+        script.src = 'https://www.simplify.com/commerce/simplify.pay.js';
+        script.async = true;
+        document.head.appendChild(script);
     },
 
     data() {
