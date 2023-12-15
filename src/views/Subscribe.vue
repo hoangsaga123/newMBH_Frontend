@@ -112,7 +112,7 @@
                     <h2 class="h2 font-weight-bold text-primary">$30<span class="text-small text-primary font-weight-normal ml-4">/ 30 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
-                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Month Subscribe" data-description="Subscribe for 30 days" data-reference="99999" data-amount="3000" data-color="#0082cb">
+                    <button v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Month Subscribe" data-description="Subscribe for 30 days" data-reference="99999" data-amount="3000" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
@@ -123,7 +123,7 @@
                     <h2 class="h2 font-weight-bold text-white">$50<span class="text-small text-white font-weight-normal ml-4">/ 90 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-white" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('quarter-year')">Subscribe</b-button>
-                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Quarter Year Subscribe" data-description="Subscribe for 90 days" data-reference="99999" data-amount="5000" data-color="#0082cb">
+                    <button v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Quarter Year Subscribe" data-description="Subscribe for 90 days" data-reference="99999" data-amount="5000" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
@@ -134,7 +134,7 @@
                     <h2 class="h2 font-weight-bold text-primary">$75<span class="text-small text-primary font-weight-normal ml-4">/ 180 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('half-year')">Subscribe</b-button>
-                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Half Year Subscribe" data-description="Subscribe for 180 days" data-reference="99999" data-amount="7500" data-color="#0082cb">
+                    <button v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Half Year Subscribe" data-description="Subscribe for 180 days" data-reference="99999" data-amount="7500" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
@@ -145,7 +145,7 @@
                     <h2 class="h2 font-weight-bold text-white">$100<span class="text-small text-white font-weight-normal ml-4">/ 270 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-white" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('three-quarter-year')">Subscribe</b-button>
-                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Three Quarter Year Subscribe" data-description="Subscribe for 270 days" data-reference="99999" data-amount="10000" data-color="#0082cb">
+                    <button v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Three Quarter Year Subscribe" data-description="Subscribe for 270 days" data-reference="99999" data-amount="10000" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
@@ -156,7 +156,7 @@
                     <h2 class="h2 font-weight-bold text-primary">$125<span class="text-small text-primary font-weight-normal ml-3">/ 365 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('year')">Subscribe</b-button>
-                    <button v-show="!canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Year Subscribe" data-description="Subscribe for 365 days" data-reference="99999" data-amount="12500" data-color="#0082cb">
+                    <button v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Year Subscribe" data-description="Subscribe for 365 days" data-reference="99999" data-amount="12500" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
@@ -371,4 +371,12 @@ export default {
     }
 
 }
+
+#simplify-checkout-embed-frame {
+    border: none;
+    height: 375px; 
+    overflow: hidden;
+    width: 100%;
+}
+
 </style>
