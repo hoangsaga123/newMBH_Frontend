@@ -111,7 +111,10 @@
                     <h1 class="h4 text-uppercase font-weight-bold  mb-4">$1 A DAY</h1>
                     <h2 class="h2 font-weight-bold text-primary">$30<span class="text-small text-primary font-weight-normal ml-4">/ 30 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
-                    <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
+                    <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
+                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Month Subscribe" data-description="Subscribe for 30 days" data-reference="99999" data-amount="3000" data-color="#0082cb">
+                        Subscribe
+                    </button>
                 </div>
             </div>
             <div class="subscribe-options-child">
@@ -119,7 +122,10 @@
                     <h1 class="h4 text-uppercase font-weight-bold text-white mb-4">56₵ A DAY</h1>
                     <h2 class="h2 font-weight-bold text-white">$50<span class="text-small text-white font-weight-normal ml-4">/ 90 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-white" />
-                    <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('quarter-year')">Subscribe</b-button>
+                    <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('quarter-year')">Subscribe</b-button>
+                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Quarter Year Subscribe" data-description="Subscribe for 90 days" data-reference="99999" data-amount="5000" data-color="#0082cb">
+                        Subscribe
+                    </button>
                 </div>
             </div>
             <div class="subscribe-options-child">
@@ -127,7 +133,10 @@
                     <h1 class="h4 text-uppercase font-weight-bold mb-4">42₵ A DAY</h1>
                     <h2 class="h2 font-weight-bold text-primary">$75<span class="text-small text-primary font-weight-normal ml-4">/ 180 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
-                    <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('half-year')">Subscribe</b-button>
+                    <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('half-year')">Subscribe</b-button>
+                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Half Year Subscribe" data-description="Subscribe for 180 days" data-reference="99999" data-amount="7500" data-color="#0082cb">
+                        Subscribe
+                    </button>
                 </div>
             </div>
             <div class="subscribe-options-child">
@@ -135,7 +144,10 @@
                     <h1 class="h4 text-uppercase font-weight-bold text-white mb-4">37₵ A DAY</h1>
                     <h2 class="h2 font-weight-bold text-white">$100<span class="text-small text-white font-weight-normal ml-4">/ 270 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-white" />
-                    <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('three-quarter-year')">Subscribe</b-button>
+                    <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('three-quarter-year')">Subscribe</b-button>
+                    <button v-show="canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Three Quarter Year Subscribe" data-description="Subscribe for 270 days" data-reference="99999" data-amount="10000" data-color="#0082cb">
+                        Subscribe
+                    </button>
                 </div>
             </div>
             <div class="subscribe-options-child">
@@ -143,7 +155,10 @@
                     <h1 class="h4 text-uppercase font-weight-bold mb-4">34₵ A DAY</h1>
                     <h2 class="h2 font-weight-bold text-primary">$125<span class="text-small text-primary font-weight-normal ml-3">/ 365 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
-                    <b-button class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('year')">Subscribe</b-button>
+                    <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('year')">Subscribe</b-button>
+                    <button v-show="!canSubscribe" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Year Subscribe" data-description="Subscribe for 365 days" data-reference="99999" data-amount="12500" data-color="#0082cb">
+                        Subscribe
+                    </button>
                 </div>
             </div>
         </div>
@@ -159,60 +174,6 @@
         </div>
     </div>
 
-    <div v-show="showPayment" class="popup">
-        <div class="popup-inner">
-            <span class="closePopupBtn" @click="closePopup">X</span>
-            <div class="row">
-                <div class="col-75">
-                    <div class="container">
-                        <form @submit.prevent="handleSubmit">
-
-                            <div class="row">
-                                <div class="col-50">
-                                    <h3>Billing Address</h3>
-                                    <label for="fname">
-                                        <font-awesome-icon icon="fa fa-user" /> Full Name</label>
-                                    <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-                                    <label for="email">
-                                        <font-awesome-icon icon="fa fa-envelope" /> Email</label>
-                                    <input type="text" id="email" name="email" placeholder="john@example.com">
-                                    <label for="adr">
-                                        <font-awesome-icon icon="fa fa-address-card" /> Address 1</label>
-                                    <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-                                    <label for="city">
-                                        <font-awesome-icon icon="fa fa-institution" /> Address 2 (Optional)</label>
-                                    <input type="text" id="city" name="city" placeholder="123 Canley Vale">
-
-                                    <div class="row">
-                                        <div class="col-50">
-                                            <label for="state">State</label>
-                                            <b-form-select id="companyState" v-model="state" :options="stateOptions" />
-                                        </div>
-                                        <div class="col-50">
-                                            <label for="zip">Zip</label>
-                                            <input type="number" id="zip" name="zip" placeholder="2166">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-50">
-                                    <h3>Payment</h3>
-                                    <button data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="Jasmine Green Tea" data-description="Smooth tea with a rich jasmine bouquet" data-reference="99999" data-amount="3000" data-color="#12B830">
-                                        Buy Now
-                                    </button>
-                                </div>
-
-                            </div>
-                            <label>
-                                <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                            </label>
-                            <input type="submit" value="Continue to checkout" class="btn">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 </template>
 
@@ -241,99 +202,8 @@ export default {
             subscribeError: "",
             showNavi: false,
 
-            state: "",
-
             loading: false,
 
-            expMonth: "",
-
-            expMonthOptions: [{
-                    text: "January",
-                    value: "01"
-                },
-                {
-                    text: "February",
-                    value: "02"
-                },
-                {
-                    text: "March",
-                    value: "03"
-                },
-                {
-                    text: "April",
-                    value: "04"
-                },
-                {
-                    text: "May",
-                    value: "05"
-                },
-                {
-                    text: "June",
-                    value: "06"
-                },
-                {
-                    text: "July",
-                    value: "07"
-                },
-                {
-                    text: "August",
-                    value: "08"
-                },
-                {
-                    text: "September",
-                    value: "09"
-                },
-                {
-                    text: "October",
-                    value: "10"
-                },
-                {
-                    text: "November",
-                    value: "11"
-                },
-                {
-                    text: "December",
-                    value: "12"
-                },
-            ],
-
-            stateOptions: [{
-                    value: null,
-                    text: 'Please select a state'
-                },
-                {
-                    value: 'NSW',
-                    text: 'NSW'
-                },
-                {
-                    value: 'QLD',
-                    text: 'QLD'
-                },
-                {
-                    value: 'VIC',
-                    text: 'VIC'
-                },
-                {
-                    value: 'NT',
-                    text: 'NT'
-                },
-                {
-                    value: 'ACT',
-                    text: 'ACT'
-                },
-                {
-                    value: 'WA',
-                    text: 'WA'
-                },
-                {
-                    value: 'SA',
-                    text: 'SA'
-                },
-                {
-                    value: 'TAS',
-                    text: 'TAS'
-                },
-            ],
 
         }
     },
@@ -341,7 +211,7 @@ export default {
     computed: {
         // Computed boolean value that returns if the user is a logged in JobSeeker
         canSubscribe() {
-            return this.loggedInUser && this.accountType == 'USER'
+            return this.loggedInUser //&& this.accountType == 'USER'
         },
 
         showNavigator() {
@@ -498,99 +368,6 @@ export default {
 
     button:hover {
         background-color: #0056b3;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    .row {
-        display: -ms-flexbox;
-        /* IE10 */
-        display: flex;
-        -ms-flex-wrap: wrap;
-        /* IE10 */
-        flex-wrap: wrap;
-        margin: 0 -16px;
-    }
-
-    .col-25 {
-        -ms-flex: 25%;
-        /* IE10 */
-        flex: 25%;
-    }
-
-    .col-50 {
-        -ms-flex: 50%;
-        /* IE10 */
-        flex: 50%;
-    }
-
-    .col-75 {
-        -ms-flex: 75%;
-        /* IE10 */
-        flex: 75%;
-    }
-
-    .col-25,
-    .col-50,
-    .col-75 {
-        padding: 0 16px;
-    }
-
-    .container {
-        background-color: #f2f2f2;
-        padding: 5px 20px 15px 20px;
-        border: 1px solid lightgrey;
-        border-radius: 3px;
-    }
-
-    input[type=text],
-    input[type=number] {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    label {
-        margin-bottom: 10px;
-        display: block;
-    }
-
-    .icon-container {
-        margin-bottom: 20px;
-        padding: 7px;
-        font-size: 30px;
-
-        span {
-            padding-right: 7px;
-        }
-    }
-
-    .btn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
-        width: 100%;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 17px;
-    }
-
-    .btn:hover {
-        background-color: #45a049;
-    }
-
-    a {
-        color: #2196F3;
-    }
-
-    hr {
-        border: 1px solid lightgrey;
     }
 
 }
