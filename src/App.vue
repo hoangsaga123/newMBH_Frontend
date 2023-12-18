@@ -60,6 +60,7 @@ export default {
                 "PaymentSuccess",
                 "PaymentFailed",
                 "SearchResult",
+                "Checkout"
             ],
 
             // Array of page names that specify which sites a LOGGED IN USER (Business) can visit (router protection)
@@ -81,6 +82,7 @@ export default {
                 "AccomodationView",
                 'Advertisment',
                 "SearchResult",
+                "Checkout"
             ],
 
             // Array of page names that specify which sites a LOGGED IN USER (Accommodation) can visit (router protection)
@@ -102,6 +104,7 @@ export default {
                 'AccomodationView',
                 'Advertisment',
                 "SearchResult",
+                "Checkout"
             ],
         };
     },
