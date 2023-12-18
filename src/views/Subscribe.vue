@@ -112,7 +112,7 @@
                     <h2 class="h2 font-weight-bold text-primary">$30<span class="text-small text-primary font-weight-normal ml-4">/ 30 days</span></h2>
                     <div class="custom-separator my-4 mx-auto bg-primary" />
                     <b-button v-show="!canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" variant="primary" @click="subscribe('month')">Subscribe</b-button>
-                    <button data-redirect-url="/Search" data-operation='create.token' v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Month Subscribe" data-description="Subscribe for 30 days" data-reference="99999" data-amount="3000" data-color="#0082cb">
+                    <button data-redirect-url="https://manybusyhands.au/#/Search" data-operation='create.token' v-show="canSubscribe" class="btn btn-primary btn-block p-2 shadow rounded-pill" data-sc-key="sbpb_YjAwODliNDAtMjI1Ni00MTNkLWI0YmUtMjE2ZDI1OWU4MWQ5" data-name="A Month Subscribe" data-description="Subscribe for 30 days" data-reference="99999" data-amount="3000" data-color="#0082cb">
                         Subscribe
                     </button>
                 </div>
