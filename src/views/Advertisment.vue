@@ -6,7 +6,7 @@
                 <b-col md="2"></b-col>
                 <b-col md="8">
 
-                    <b-container class="my-companies-data mx-5 my-5 p-3 w-100">
+                    <b-container class="my-companies-data my-5 p-3 w-100">
                         <b-row>
                             <b-col md="9"></b-col>
                             <b-col>
@@ -217,7 +217,7 @@
                                             </div>
                                             <div class="job-form-column-2"></div>
                                             <div class="job-form-column-3">
-                                                <label for="description">Description:</label>
+                                                <p for="description"> <b>Description:</b></p>
                                                 <textarea id="description" placeholder="Enter description" rows="20" v-model="description" trim required></textarea>
                                             </div>
                                         </div>
@@ -358,11 +358,8 @@ export default {
                     'Authorization': `Basic ${localStorage.getItem("access_token")}`
                 }
             }).then((response) => {
-                console.log(response)
                 this.isSubscribe = response.data
             });
-
-            console.log(this.isSubscribe)
         },
 
         splitJoin(theText) {
@@ -592,7 +589,7 @@ export default {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     /* Use a row layout */
     padding: 10px;
-    width: 1500px;
+    width: 100%;
     align-items: center;
 }
 
@@ -619,20 +616,14 @@ export default {
 }
 
 .job-form-flex-box>.job-form-column-1 {
-    -webkit-flex: 1;
-    -ms-flex: 1;
     flex: 0 0 30%;
 }
 
 .job-form-flex-box>.job-form-column-2 {
-    -webkit-flex: 2;
-    -ms-flex: 2;
     flex: 0 0 5%;
 }
 
 .job-form-flex-box>.job-form-column-3 {
-    -webkit-flex: 3;
-    -ms-flex: 3;
     flex: 0 0 65%;
 }
 
@@ -655,7 +646,6 @@ export default {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    width: 100%;
 }
 
 .job-form button {

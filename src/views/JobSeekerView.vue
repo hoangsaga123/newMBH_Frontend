@@ -4,7 +4,7 @@
     <div v-show="!editMode">
         <b-row>
             <b-col md="2"></b-col>
-            <b-col md="8" class="my-3 mx-5 p-5 business-view-area">
+            <b-col md="8" class="my-3 p-5 business-view-area">
                 <b-row>
                     <!-- COMPANY NAME -->
                     <b-col md="9">
@@ -20,7 +20,7 @@
                 </b-row>
                 <hr>
                 <h2></h2>
-                <b-img src="@/assets/img/Cotton picking.jpg" alt="Image" center class="rounded-0" img-width="400" />
+                <b-img src="@/assets/img/Cotton picking.jpg" alt="Image" center class="rounded-0" fluid />
                 <br>
                 <hr>
                 <b-row>

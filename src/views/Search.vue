@@ -6,7 +6,7 @@
             <div class="search-input m-5 p-5">
                 <!-- SEARCH TITLE -->
                 <b-row>
-                    <b-img src="@/assets/img/manyhand.logo.png" class="mx-auto" center right alt="ManyBusyHands manybusyhands mbh MBH logo Logo" width="500" height="auto" />
+                    <b-img src="@/assets/img/manyhand.logo.png" class="mx-auto" center right alt="ManyBusyHands manybusyhands mbh MBH logo Logo"  fluid />
                     <h3 class="mx-auto mt-2 text-left">
                         <b-badge variant="warning" class="p-3"> Find your next lead! </b-badge>
                     </h3>

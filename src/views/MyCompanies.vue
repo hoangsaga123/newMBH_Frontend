@@ -4,7 +4,7 @@
         <b-row>
             <b-col md="2"></b-col>
             <b-col md="8">
-                <b-container class="my-companies-data mx-5 my-5 p-3 w-100">
+                <b-container class="my-companies-data my-5 p-3 w-100">
                     <!-- TITLE -->
                     <b-row>
                     </b-row>
@@ -19,7 +19,7 @@
                         <b-card no-body class="overflow-hidden mb-5" v-for="business in businesses" :key="business.id">
                             <b-row no-gutters>
                                 <b-col md="6">
-                                    <b-card-img src="@/assets/img/olives.jpg" alt="Image" class="rounded-0" img-width="200"></b-card-img>
+                                    <b-card-img src="@/assets/img/olives.jpg" alt="Image" class="rounded-0" fluid></b-card-img>
                                 </b-col>
                                 <!-- BUSINESS DETAILS -->
                                 <b-col md="6">
@@ -60,7 +60,7 @@
                         <b-card no-body class="overflow-hidden mb-2" v-for="accomodation in accomodations" :key="accomodation.id">
                             <b-row no-gutters>
                                 <b-col md="6">
-                                    <b-card-img :src="require(`@/assets/img/randomAccommodation/${accomodation.image}`)" alt="Image" class="rounded-0" height="350"></b-card-img>
+                                    <b-card-img :src="require(`@/assets/img/randomAccommodation/${accomodation.image}`)" alt="Image" class="rounded-0" fluid></b-card-img>
                                 </b-col>
                                 <!-- ACCOMODATION DETAILS -->
                                 <b-col md="6">

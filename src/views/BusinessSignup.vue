@@ -52,7 +52,7 @@
             <h4 class="text-warning text-center">We will help you get the right people into the right place at the right time</h4>
 
             <div class="business-signup-pricing">
-                <img src="@/assets/img/Pricing.png" height="100%" width="100%" />
+                <img src="@/assets/img/Pricing.png" fluid />
             </div>
 
         </b-container>

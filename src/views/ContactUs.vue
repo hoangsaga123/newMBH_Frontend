@@ -25,7 +25,7 @@
             <b-row>
                 <b-col md="5" sm="auto" class="mt-3">
                     <b-row>
-                        <b-img src="@/assets/img/manyhand.logo.png" class="contact-us-logo" />
+                        <b-img src="@/assets/img/manyhand.logo.png" class="contact-us-logo" fluid />
                     </b-row>
                     <!-- ADDRESS -->
                     <b-row>
