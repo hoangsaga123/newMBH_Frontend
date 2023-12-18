@@ -11,7 +11,7 @@
                             <b-col md="9"></b-col>
                             <b-col>
                                 <h1>
-                                    <b-button variant="primary" class="text-right mt-4 ml-4" @click="showForm = true">ADD JOB ADVERTISMENT</b-button>
+                                    <b-button variant="primary" class="text-right mt-4 ml-4" @click="showAddJobForm">ADD JOB ADVERTISMENT</b-button>
                                 </h1>
                             </b-col>
                         </b-row>
@@ -234,6 +234,16 @@
         </b-container>
     </div>
 
+    <div v-show="showNavigator" class="popup">
+        <div class="popup-inner">
+            <span class="closePopupBtn" @click="closePopup">X</span>
+            <img src="@/assets/img/logo2.jpeg" alt="ManyBusyHands Logo" />
+            <h2>FUNCTION RESTRICTION!</h2>
+            <p>You need to subscribe to use this function</p>
+            <b-button id="signInBtn" to="/Subscribe">Subscribe Now</b-button>
+        </div>
+    </div>
+
 </section>
 </template>
 
@@ -243,6 +253,8 @@ export default {
     name: 'Advertisment',
     data() {
         return {
+            isSubscribe: false,
+            showNavi: false,
             jobAdvertisments: [],
             currentPage: null,
             rows: null,
@@ -317,8 +329,41 @@ export default {
         noJobs() {
             return !(this.jobAdvertisments.length > 0)
         },
+
+        showNavigator() {
+            return this.showNavi
+        },
     },
     methods: {
+
+        showAddJobForm() {
+            if (this.isSubscribe) {
+                this.showForm = true
+            } else {
+                this.showNavi = true
+            }
+        },
+
+        closePopup() {
+            this.showNavi = false
+        },
+
+        async checkSubscribe() {
+            await axios.get('https://3.25.51.142.nip.io/api/payment', {
+                params: {
+                    "email": localStorage.getItem("accEmail")
+                }
+            }, {
+                headers: {
+                    'Authorization': `Basic ${localStorage.getItem("access_token")}`
+                }
+            }).then((response) => {
+                console.log(response)
+                this.isSubscribe = response.data
+            });
+
+            console.log(this.isSubscribe)
+        },
 
         splitJoin(theText) {
             return theText
@@ -358,23 +403,27 @@ export default {
         },
 
         showUpdateJob(job) {
-            this.id = job.id
-            this.title = job.title
-            this.companyName = job.companyName
-            this.location = job.location
-            this.town = job.districtsDetails.name
-            this.state = job.districtsDetails.state
-            this.postcode = job.districtsDetails.postcode
-            this.terms = job.terms
-            this.contactEmail = job.contactEmail
-            this.contactPhone = job.contactPhone
-            this.salary = job.salary
-            this.startDate = job.startDate
-            this.endDate = job.endDate
-            this.description = job.description
 
-            this.showForm2 = true;
+            if (this.isSubscribe) {
+                this.id = job.id
+                this.title = job.title
+                this.companyName = job.companyName
+                this.location = job.location
+                this.town = job.districtsDetails.name
+                this.state = job.districtsDetails.state
+                this.postcode = job.districtsDetails.postcode
+                this.terms = job.terms
+                this.contactEmail = job.contactEmail
+                this.contactPhone = job.contactPhone
+                this.salary = job.salary
+                this.startDate = job.startDate
+                this.endDate = job.endDate
+                this.description = job.description
 
+                this.showForm2 = true;
+            } else {
+                this.showNavi = true
+            }
         },
 
         clearForm() {
@@ -474,12 +523,69 @@ export default {
 
     created() {
         this.currentPage = 1
+        this.checkSubscribe()
         this.getJobAdvertisment()
     }
 };
 </script>
 
 <style>
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .popup-inner {
+        background: #FFF;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        .closePopupBtn {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #c2baba;
+            /* Gray color */
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #333;
+        margin: 20px;
+    }
+
+    b-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+}
+
 .job-form-container {
     background-color: #fff;
     border-radius: 8px;
