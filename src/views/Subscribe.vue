@@ -241,18 +241,17 @@ export default {
             var hostedPayments = SimplifyCommerce.hostedPayments(
                 async function (response) {
                     console.log(response)
-                    // await axios.post('https://3.25.51.142.nip.io/api/payment', {
-                    //     "cardToken": response.cardToken,
-                    //     "amount": response.amount,
-                    //     "reference": response.reference,
-                    //     "name": response.name
-                    // }, {
-                    //     headers: {
-                    //         'Authorization': `Basic ${localStorage.getItem("access_token")}`
-                    //     }
-                    // }).then((response2) => {
-                    //     console.log(response2)
-                    // });
+                    await axios.post('https://3.25.51.142.nip.io/api/payment', {
+                        "paymentStatus": response.data.paymentStatus,
+                        "email": localStorage.getItem("accEmail"),
+                        "transactionData": response.data.transactionData
+                    }, {
+                        headers: {
+                            'Authorization': `Basic ${localStorage.getItem("access_token")}`
+                        }
+                    }).then((response2) => {
+                        console.log(response2)
+                    });
                 }, {
                     operation: 'create.payment'
                 }
