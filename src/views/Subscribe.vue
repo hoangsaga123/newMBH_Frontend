@@ -256,7 +256,7 @@ export default {
                 }, {
                     operation: 'create.payment'
                 }
-            ).closeOnCompletion();
+            );
         },
 
         closePopup() {
