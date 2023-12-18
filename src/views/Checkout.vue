@@ -32,7 +32,7 @@ export default {
 
     methods: {
         async sendDataToServer(data) {
-            await axios.post('https://3.25.51.142.nip.io/api/payment', dataFromQueryString, {
+            await axios.post('https://3.25.51.142.nip.io/api/payment', data, {
                 headers: {
                     'Authorization': `Basic ${localStorage.getItem("access_token")}`
                 }
