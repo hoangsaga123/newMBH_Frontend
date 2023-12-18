@@ -239,6 +239,7 @@ export default {
         async doPayment() {
             var hostedPayments = SimplifyCommerce.hostedPayments(
                 async function (response) {
+                    console.log(response)
                     await axios.post('https://3.25.51.142.nip.io/api/payment', {
                         "cardToken": response.cardToken,
                         "amount": response.amount,
@@ -249,7 +250,7 @@ export default {
                             'Authorization': `Basic ${localStorage.getItem("access_token")}`
                         }
                     }).then((response2) => {
-
+                        console.log(response2)
                     });
                 }, {
                     operation: 'create.token'
