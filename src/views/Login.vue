@@ -22,9 +22,10 @@
                                 <!-- LOGIN BUTTON (BUTTONS FOR SUBMISSION TO MOCK USERS) -->
                                 <b-form-group class="mb-4">
                                     <br>
-                                    <b-button variant="primary" size="md" class="mt-3 mm-2" @click="login">Login as a Subscriber</b-button>
+                                    <b-button variant="primary" size="md" class="mt-3 mm-2" @click="login">Login</b-button>
+                                    <!--<b-button variant="primary" size="md" class="mt-3 mm-2" @click="login">Login as a Subscriber</b-button>
                                     <b-button variant="secondary" size="md" class="mt-3 mm-2" @click="login">Login as a Business</b-button>
-                                    <b-button variant="success" size="md" class="mt-3 mm-2" @click="login">Login as an Accommodation Provider</b-button>
+                                    <b-button variant="success" size="md" class="mt-3 mm-2" @click="login">Login as an Accommodation Provider</b-button>-->
                                 </b-form-group>
                                 <!-- REGISTRATION LINKS -->
                                 <div id="signup-list">

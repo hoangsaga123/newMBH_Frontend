@@ -87,7 +87,7 @@
                         <br>
                     </b-container>
                     <!-- JOBS ATTACHED -->
-                    <b-container>
+                    <b-container v-show="jobsAttached">
                         <h1 class="text-left">
                             <b-badge variant="secondary" class="mb-3 p-3 py-4 w-100" size="lg">Job Advertisment List</b-badge>
                         </h1>
@@ -239,7 +239,7 @@ export default {
                         'state': this.$route.query.state,
                         'postcode': this.$route.query.postcode,
                         'range': parseInt(this.$route.query.range),
-                        'keyword': this.$route.query.keyword,
+                        'keywords': this.$route.query.keywords,
                         'industry': this.$route.query.industry,
                         'page': this.currentPage - 1
                     },
@@ -285,7 +285,7 @@ export default {
                         'state': this.$route.query.state,
                         'postcode': this.$route.query.postcode,
                         'range': parseInt(this.$route.query.range),
-                        'keyword': this.$route.query.keyword,
+                        'keywords': this.$route.query.keywords,
                         'type': this.$route.query.type,
                         'page': this.currentPage - 1
                     },

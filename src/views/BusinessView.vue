@@ -99,7 +99,7 @@
                             <b-form-input type="text" id="companyName" v-model="business.firm" trim :state="validCompanyName" />
                         </b-form-group>
                         <b-alert variant="warning" v-show="abnValidationError" show>
-                            <p>An error occured validating your ABN online, please try again.</p>
+                            <p>Invalid or unregistered ABN</p>
                         </b-alert>
                         <b-form-group label="ABN: " class="text-right" label-cols="3" content-cols="7" label-for="companyABN" :state="validABN" invalid-feedback="Please enter your unique 11 digit ABN">
                             <b-row>
@@ -658,30 +658,25 @@ export default {
 
         // This method sends a request to the server, requesting the data 'abn' be validated
         // by lookup from the Australia Government. If successful, set 'abnValidated' to true
-        validateABN() {
-            this.abnValidationError = false
-            let that = this
-            let url = '/businesses'
-            // AXIOS
-            // this.axios.get(url, { params: { 'abn': this.business.abn } })
-            //     .then(function (response) {
-            //         let xmlObj = new XML()
-            //         let xmlTest = xmlObj.setContent(response.data)
-            //         that.business.abnValidated = true
-            //
-            //     }).catch(function (error) {
-            //         if(error.response || error.request) {
-            //             that.abnValidationError = true
-            //         }
-            //         else {
-            //             that.abnValidationError = true
-            //         }
-            //     })
-
-            // Mocking ABN validation
-            this.business.abnValidated = true
-
+        async validateABN() {
+            try {
+                await axios.get('https://abr.business.gov.au/ABN/View?id=' + this.business.abn).then((response) => {
+                    if (response.data.toString().includes('Current details for ABN')) {
+                        this.abnValidationError = false
+                        this.business.abnValidated = true
+                    } else {
+                        this.business.abnValidated = false
+                        this.abnValidationError = true
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+                this.business.abnValidated = false
+                this.abnValidationError = true
+            }
         },
+
+        
 
         // This method sends a request to the server to retrieve the business attached to the
         // prop passed through 'businessId'. If unsuccessful, the user will be send back a page

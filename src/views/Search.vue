@@ -415,7 +415,7 @@ export default {
                     'state': this.searchState,
                     'postcode': this.searchPostCode,
                     'range': parseInt(this.searchRange),
-                    'keyword': this.searchKeywords,
+                    'keywords': this.searchKeywords,
                     'type': this.searchAccomType,
                     'industry': this.searchIndustry,
                     'page': 0,
